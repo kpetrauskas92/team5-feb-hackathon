@@ -23,6 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Load .env file
 load_dotenv()
 
+# Cloudinary settings
+CLOUDINARY_STORAGE = {
+    'CLOUDINARY_URL': os.getenv('CLOUDINARY_URL')
+}
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
