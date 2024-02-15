@@ -38,7 +38,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1',
-                 'lovesched-team5-0bc1fe06d0da.herokuapp.com']
+                 'lovesched-team5-0bc1fe06d0da.herokuapp.com',
+                 'localhost']
 
 
 # Application definition
