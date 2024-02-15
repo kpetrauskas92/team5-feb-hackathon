@@ -330,4 +330,8 @@ dist
 pyvenv.cfg
 pip-selfcheck.json
 
+# TailwindCSS output
+
+static/css/output.css
+
 # End of https://www.toptal.com/developers/gitignore/api/venv,node,django,database
