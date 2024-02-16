@@ -9,3 +9,10 @@ html {
 body {
     margin: 0;
 }
+
+/* About us cards styles */
+
+.grow-on-hover:hover {
+    transform: scale(1.05);
+    transition: transform 0.4s ease-in-out, box-shadow 0.3s ease-in-out;
+}
