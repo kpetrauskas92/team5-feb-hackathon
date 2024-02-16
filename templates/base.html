@@ -1,6 +1,6 @@
 <!doctype html>
 {% load static %}
-<html lang="en" data-theme="light">
+<html lang="en" class="h-full">
   <head>
 
     {% block meta %}
@@ -35,19 +35,24 @@
     <title></title>
   </head>
 
-  <body>
+  <body class="flex flex-col min-h-screen">
     <header>
-      {% include 'includes/nav-bar.html' %}
+        {% include 'includes/nav-bar.html' %}
     </header>
 
-    {% block page_header %}
-    {% endblock %}
+    <main class="flex-grow">
+        {% block page_header %}
+        {% endblock %}
 
-    {% block content %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </main>
 
     {% block postloadjs %}
     {% endblock %}
-    {% include 'includes/footer.html' %}
-  </body>
+
+    <footer class="mt-auto">
+        {% include 'includes/footer.html' %}
+    </footer>
+</body>
 </html>

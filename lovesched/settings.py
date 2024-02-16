@@ -38,7 +38,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1',
-                 'lovesched-team5-0bc1fe06d0da.herokuapp.com']
+                 'lovesched-team5-0bc1fe06d0da.herokuapp.com',
+                 'localhost']
 
 
 # Application definition
@@ -55,7 +56,11 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
-    'landing'
+    'landing',
+
+    # Other apps
+    "crispy_forms",
+    "crispy_tailwind",
 ]
 
 MIDDLEWARE = [
@@ -70,6 +75,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'lovesched.urls'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 TEMPLATES = [
     {
