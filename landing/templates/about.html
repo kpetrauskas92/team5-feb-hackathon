@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}About Page{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4">
+    <h1 class="text-4xl font-bold text-center my-12">Meet Our Team</h1>
+    <div class="grid md:grid-cols-3 gap-12">
+        <!--  Member: Karolis Petrauskas -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out">
+            <img class="w-full h-56 object-cover object-center" src="" alt="Member Name">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-2">Karolis Petrauskas</h2>
+                <p class="text-gray-800"><strong>Position:</strong>Scrum Master/Love expert</p>
+                <p class="mt-3 text-gray-600">Karolis has a PhD in Romantic Studies from the University of Love.
+                    Whether you need advice on crafting the perfect love letter, or finding the best flowers that say "I'm sorry for
+                    eating the last piece of pizza," Karolis is your go-to.</p>
+            </div>
+        </div>
+        <!--  Member: Claire Fisher  -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out">
+            <img class="w-full h-56 object-cover object-center" src="" alt="Member Name">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-2">Claire Fisher</h2>
+                <p class="text-gray-800"><strong>Position:</strong>Web Developer/Love Strategy Guru</p>
+                <p class="mt-3 text-gray-600">Claire is our resident Love Strategy Guru. With a track record
+                    of setting up more successful blind dates than a dating app, she specializes in love at first sight and second chances.
+                    She believes in the power of serenades under the moonlight, despite the neighbors' complaints. When not matchmaking,
+                    Clair is on a quest to invent an "apology chocolate" that instantly forgives any faux pas. Her motto? "Love is a game best played boldly."</p>
+            </div>
+        </div>
+           <!--  Member: Ann Edvinsson  -->
+           <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out">
+            <img class="w-full h-56 object-cover object-center" src="" alt="Member Name">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-2">Ann Edvinsson</h2>
+                <p class="text-gray-800"><strong>Position:</strong>Web Developer/Self-Proclaimed Romance Specialist</p>
+                <p class="mt-3 text-gray-600">Ann, our enthusiastic Self-Proclaimed Romance Specialist, has watched every rom-com available and quotes them as if they were
+                    ancient love scriptures. Despite her less-than-stellar track record in her own romantic endeavors, Ann is always eager
+                    to share her "expert" advice, often leading to embarrassing unexpected outcomes. Whether you're seeking to navigate the
+                    complexities of love or simply need a bad advice, Ann's unshakeable confidence and insights will surely entertain.
+                    Just remember, her methods are not scientifically proven—unless you count the science of love!</p>
+            </div>
+        </div>
+         <!--  Member: Yakiv Brychuk  -->
+         <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out">
+            <img class="w-full h-56 object-cover object-center" src="" alt="Member Name">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-2">Yakiv Brychuk </h2>
+                <p class="text-gray-800"><strong>Position:</strong>Web Developer/Self-Proclaimed Romance Specialist</p>
+                <p class="mt-3 text-gray-600"></p>
+            </div>
+        </div>
+         <!--  Member: Declan -->
+         <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out">
+            <img class="w-full h-56 object-cover object-center" src="" alt="Member Name">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-2">Declan </h2>
+                <p class="text-gray-800"><strong>Position:</strong>Web Developer/Self-Proclaimed Romance Specialist</p>
+                <p class="mt-3 text-gray-600"></p>
+            </div>
+        </div>
+           <!--  Member: Adam Kestell -->
+           <div class="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out">
+            <img class="w-full h-56 object-cover object-center" src="" alt="Member Name">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-2">Adam Kestell </h2>
+                <p class="text-gray-800"><strong>Position:</strong>Web Developer/Self-Proclaimed Romance Specialist</p>
+                <p class="mt-3 text-gray-600"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="teamMemberModal" class="hidden fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white rounded-lg p-5 shadow-xl">
+            <!-- Modal content goes here -->
+            <button id="closeModal">Close</button>
+        </div>
+    </div>
+</div>
+<!--
+<script>
+    document.querySelectorAll('.team-member').forEach(member => {
+        member.addEventListener('click', function() {
+            document.getElementById('teamMemberModal').classList.remove('hidden');
+            // Additional logic
+        });
+    });
+
+    document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('teamMemberModal').classList.add('hidden');
+    });
+</script>
+-->
+
+{% endblock %}
