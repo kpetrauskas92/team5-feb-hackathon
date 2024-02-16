@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'landing',
+    'event',
 
     # Other apps
     "crispy_forms",
