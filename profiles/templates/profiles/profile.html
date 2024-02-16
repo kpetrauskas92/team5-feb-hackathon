@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tailwind_filters %}
+
+{% block head_title %}Profile Page{% endblock %}
+
+{% block content %}
+
+<div class="container mx-auto mt-10 p-5 bg-white shadow-lg rounded-lg">
+    <h1>This is the profile page for {{user.first_name}}</h1>
+</div>
+    <a href=""
+        class="text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out">
+        Back to Events List
+    </a>
+</div>
+
+
+{% endblock %}
