@@ -56,7 +56,11 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
-    'landing'
+    'landing',
+
+    # Other apps
+    "crispy_forms",
+    "crispy_tailwind",
 ]
 
 MIDDLEWARE = [
@@ -71,6 +75,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'lovesched.urls'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"
 
 TEMPLATES = [
     {
