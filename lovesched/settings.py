@@ -103,6 +103,25 @@ SITE_ID = 1
 
 WSGI_APPLICATION = 'lovesched.wsgi.application'
 
+# Allauth settings
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = False
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_SESSION_REMEMBER = True
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
+# ACCOUNT_FORMS = {
+#     'login': 'profiles.forms.CustomLoginForm',
+#     'signup': 'profiles.forms.CustomSignupForm',
+# }
+
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases

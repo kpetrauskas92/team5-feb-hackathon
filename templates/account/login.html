@@ -1,41 +1,43 @@
-{% extends "base.html" %}
-{% load i18n %}
-{% load allauth account %}
+{% extends 'base.html' %}
 
 {% load tailwind_filters %}
-{% block head_title %}
-    {% trans "Sign In" %}
-{% endblock head_title %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign In" %}
-    {% endelement %}
-    <p>
-        {% blocktrans %}If you have not created an account yet, then please
-    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
-    </p>
-    {% url 'account_login' as login_url %}
-    <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-        {% element form form=form method="post" action=login_url tags="entrance,login" %}
-            {% slot body %}
+
+<!-- Main content -->
+<section aria-labelledby="login-title">
+
+    <div class="container flex flex-col items-center justify-center mx-auto mt-10">
+        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-slate-50">
+
+            <!-- Heading section -->
+            <h1 id="login-title" class="text-2xl font-bold text-center text-primary pt-2">Login</h1>
+
+            <!-- Signup Link -->
+            <div class="flex justify-center my-2 text-sm dark:text-black">
+                <p>Don't have an account?</p>
+                    <a href="{% url 'account_signup' %}" class="text-blue-500 link ml-1">
+                        Sign Up
+                    </a>
+            </div>
+
+            <!-- Form Section -->
+            <form class="card-body" action="login_url" method="POST">
                 {% csrf_token %}
                 {{ form|crispy }}
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
                 {% if redirect_field_value %}
-                    <input type="hidden"
-                        name="{{ redirect_field_name }}"
-                        value="{{ redirect_field_value }}" />
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
-            {% endslot %}
-            {% slot actions %}
-                {% element button type="submit" tags="prominent,login" %}
-                    {% trans "Sign In" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
-        {% if SOCIALACCOUNT_ENABLED %}
-            {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-        {% endif %}
+
+                <!-- Submit Button -->
+                <button id="loginButton" class="btn rounded-md btn-primary w-full mt-4"
+                        type="submit"
+                        >
+                Login
+                </button>
+            </form>
+        </div>
     </div>
-{% endblock content %}
+</section>
+
+{% endblock %}

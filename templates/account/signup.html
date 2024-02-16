@@ -1,34 +1,48 @@
-{% extends "account/base_entrance.html" %}
-{% load allauth i18n %}
-{% block head_title %}
-    {% trans "Signup" %}
-{% endblock head_title %}
+{% extends 'base.html' %}
+
+{% load tailwind_filters %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
-    <p>
-        {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
-    </p>
-    {% url 'account_signup' as action_url %}
-    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-        {% slot body %}
-            {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {% if redirect_field_value %}
+
+<!-- Main content -->
+<section aria-labelledby="signup-title">
+
+    <div class="container flex flex-col items-center justify-center mx-auto mt-10">
+        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 dark:bg-slate-50">
+
+            <!-- Heading -->
+            <h1 id="signup-title" class="text-2xl font-bold text-center text-primary pt-2">Sign Up</h1>
+
+            <!-- Login Link Section -->
+            <div class="flex justify-center my-2 text-sm dark:text-black">
+                <p>Have an account?</p>
+                <a href="{% url 'account_login' %}"
+                    class="text-blue-500 ml-1"
+                    >
+                    Login
+                </a>
+            </div>
+
+            <!-- Form Section -->
+            <form class="card-body" method="POST"
+                >
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% if redirect_field_value %}
                 <input type="hidden"
-                       name="{{ redirect_field_name }}"
-                       value="{{ redirect_field_value }}" />
-            {% endif %}
-        {% endslot %}
-        {% slot actions %}
-            {% element button tags="prominent,signup" type="submit" %}
-                {% trans "Sign Up" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
-{% endblock content %}
+                        name="{{ redirect_field_name }}"
+                        value="{{ redirect_field_value }}" />
+                {% endif %}
+                
+                <!-- Submit Button -->
+                <button id="signupButton" class="btn btn-primary w-full mt-4" 
+                        type="submit"
+                        >
+                Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
