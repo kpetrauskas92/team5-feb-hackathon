@@ -29,17 +29,16 @@
         <p class="text-md text-gray-600">{{ eventpost.author }}</p>
         <p class="text-lg text-gray-700"><strong>Updated:</strong></p>
         <p class="text-md text-gray-600">{{ eventpost.updated_on }}</p>
-    </div>
-
-    <!-- Update and delete event -->
+        <!-- Update and delete event -->
     {% if user.is_authenticated and eventpost.author == user %}
-    <a href="{% url 'update_event' slug=eventpost.slug %}" class="dark:text-black btn btn-ghost">
-        Edit Your Idea
+    <a href="{% url 'update_event' slug=eventpost.slug %}" class="btn btn-sm btn-secondary">
+        Edit
     </a>
-    <a href="{% url 'delete_event' slug=eventpost.slug %}" class="dark:text-black btn btn-ghost">
-        Delete This Idea
+    <a href="{% url 'delete_event' slug=eventpost.slug %}" class="btn btn-sm btn-secondary">
+        Delete
     </a>
     {% endif %}
+    </div>
 
     <!-- Comment count -->
     <div class="dark:text-black">
@@ -76,20 +75,22 @@
                 {% endif %}
             {% endfor %}
         </div>
+
     <!--Create comment-->
     <div class="dark:text-black">
         {% if user.is_authenticated %}
         <h3>Leave a comment:</h3>
         <form id="commentForm" method="post">
-          {{ comment_form|crispy }}
-          {% csrf_token %}
-          <button type="submit" class="">Submit</button>
+            {{ comment_form|crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-ghost">Submit</button>
         </form>
         {% else %}
-        <p>Log in to leave a comment</p>
+            <p>Log in to leave a comment</p>
         {% endif %}
-      </div>
-      <!-- Delete confirmation modal needs to be added here but unsure of how to in Tailwind-->
+    </div>
+
+<!-- Delete confirmation modal needs to be added here but unsure of how to in Tailwind-->
 </div>
 <a href="{% url 'event_list' %}"
     class="btn btn-primary">Back
