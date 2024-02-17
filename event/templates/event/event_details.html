@@ -1,31 +1,36 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load crispy_forms_tags %}
+{% load tailwind_filters %}
 
-{% block head_title %}Home Page{% endblock %}
+{% block head_title %}Event Details{% endblock %}
 
 {% block content %}
 
 <div class="container mx-auto mt-10 p-5 bg-white shadow-lg rounded-lg">
     <!-- Event image-->
     <div class="">
-        {% if "placeholder" in eventpost.event_image.url %}
+        {% if "placeholder" in eventpost.image.url %}
         <img src="{% static 'images/placeholder.webp' %}"
             alt="placeholder image">
         {% else %}
-        <img src=" {{ eventpost.event_image.url }}" alt="{{ eventpost.title }}">
+        <img src=" {{ eventpost.image.url }}" alt="{{ eventpost.event_name }}">
         {% endif %}
     </div>
-    <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ event.title }}
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ event.event_name }}
     </h1>
-    <p class="text-xl text-gray-600"><strong>Date:</strong> {{ event.date }}</p>
     <p class="text-xl text-gray-600"><strong>Location:</strong> {{ event.location }}</p>
     <div class="mt-4 mb-4 p-2 bg-gray-50 rounded">
         <p class="text-lg text-gray-700"><strong>Description:</strong></p>
         <p class="text-md text-gray-600">{{ event.description }}</p>
+        <p class="text-lg text-gray-700"><strong>Category:</strong></p>
+        <p class="text-md text-gray-600">{{ event.category }}</p>
+        <p class="text-lg text-gray-700"><strong>Author:</strong></p>
+        <p class="text-md text-gray-600">{{ event.author }}</p>
+        <p class="text-lg text-gray-700"><strong>Updated:</strong></p>
+        <p class="text-md text-gray-600">{{ event.updated_on }}</p>
     </div>
     <!-- Update and delete event -->
-    {% if user.is_authenticated and eventpost.user == user %}
+    {% if user.is_authenticated and eventpost.author == user %}
     <button class="" data-eventpost_id="{{ eventpost.id }}"
         data-update_url="{% url 'update_event' slug=eventpost.slug %}">Update
         Event</button>
@@ -42,10 +47,10 @@
         <h3>Comments:</h3>
         <div class="">
             {% for comment in comments %}
-                <div class="{% if not comment.approved %}{% if comment.user == user %}opacity-50{% else %}hidden{% endif %}{% endif %}">
+                <div class="{% if not comment.approved %}{% if comment.author == user %}opacity-50{% else %}hidden{% endif %}{% endif %}">
                     <!-- Comment content -->
                     <p class="">
-                        {{ comment.user }}
+                        {{ comment.author }}
                         <span class="">
                             {{ comment.created_on }}
                         </span> wrote:
@@ -55,12 +60,12 @@
                     </div>
                 </div>
                 <!-- Edit and delete comment -->
-                {% if not comment.approved and comment.user == user %}
+                {% if not comment.approved and comment.author == user %}
                     <p>
                         This comment is awaiting approval
                     </p>
                 {% endif %}
-                {% if user.is_authenticated and comment.user == user %}
+                {% if user.is_authenticated and comment.author == user %}
                     <button class="" data-comment_id="{{ comment.id }}">Delete</button>
                     <button class="" data-comment_id="{{ comment.id }}">Edit</button>
                 {% endif %}
@@ -71,7 +76,7 @@
         {% if user.is_authenticated %}
         <h3>Leave a comment:</h3>
         <form id="commentForm" method="post">
-          {{ comment_form | crispy }}
+          {{ comment_form|crispy }}
           {% csrf_token %}
           <button type="submit" class="">Submit</button>
         </form>

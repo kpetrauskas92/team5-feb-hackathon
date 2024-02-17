@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import preview_event_details
+from .views import event_details
 
 urlpatterns = [
-    path('preview-event/', preview_event_details, name='preview_event'),
+    path('event/<slug:slug>/', event_details, name='event'),
+
 ]
