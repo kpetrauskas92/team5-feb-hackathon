@@ -11,7 +11,7 @@
     <!-- Event image-->
     <div class="">
         {% if "placeholder" in eventpost.image.url %}
-        <img src="{% static 'images/placeholder.webp' %}"
+        <img src="{% static 'elements/placeholders/post_placeholder.webp' %}"
             alt="placeholder image">
         {% else %}
         <img src=" {{ eventpost.image.url }}" alt="{{ eventpost.event_name }}">
@@ -33,11 +33,12 @@
 
     <!-- Update and delete event -->
     {% if user.is_authenticated and eventpost.author == user %}
-    <button class="dark:text-black btn btn-ghost" data-eventpost_id="{{ eventpost.id }}"
-        data-update_url="{% url 'update_event' slug=eventpost.slug %}">Update
-        Event</button>
-    <button class="dark:text-black btn btn-ghost" data-eventpost_id="{{ eventpost.id }}"
-        data-eventpost_slug="{{ eventpost.slug }}">Delete Event</button>
+    <a href="{% url 'update_event' slug=eventpost.slug %}" class="dark:text-black btn btn-ghost">
+        Edit Your Idea
+    </a>
+    <a href="{% url 'delete_event' slug=eventpost.slug %}" class="dark:text-black btn btn-ghost">
+        Delete This Idea
+    </a>
     {% endif %}
 
     <!-- Comment count -->

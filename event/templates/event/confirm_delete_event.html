@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto mt-10">
+    <h1 class="text-xl font-bold mb-5">Are you sure you want to delete "{{ eventpost.event_name }}"?</h1>
+    <form action="{% url 'delete_event' slug=eventpost.slug %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Yes, delete it
+        </button>
+        <a href="{% url 'event' slug=eventpost.slug %}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            Cancel
+        </a>
+    </form>
+</div>
+{% endblock %}

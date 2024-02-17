@@ -2,6 +2,12 @@
 
 <div class="navbar bg-base-300">
 
+	{% comment %} {% if messages %}
+    <div class="message-container">
+        {% include 'includes/toasts.html' %}
+    </div>
+{% endif %} {% endcomment %}
+
 	<!-- Left Nav -->
 	<div class="navbar-start">
 		<!-- Light Mode Logo -->
@@ -74,16 +80,17 @@
 	</div>
 </div>
 
+
 <!-- Theme Controller Script -->
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		const themeController = document.querySelector('.theme-controller');
 		const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-	
+
 		// Reference to the logos
 		const logoLightMode = document.querySelector('.logo-lightmode');
 		const logoDarkMode = document.querySelector('.logo-darkmode');
-	
+
 		function updateLogosForTheme(theme) {
 			// Show or hide logos based on the theme
 			if (theme === 'dark') {
@@ -94,28 +101,28 @@
 				logoDarkMode.style.display = 'none';
 			}
 		}
-	
-		// Set the initial theme based on system preference
-		if (systemPrefersDark) {
-			document.documentElement.setAttribute('data-theme', 'dark');
-			themeController.checked = true; // Assuming dark mode is the "checked" state
-			updateLogosForTheme('dark');
-		} else {
-			document.documentElement.setAttribute('data-theme', 'valentine');
-			themeController.checked = false;
-			updateLogosForTheme('valentine');
+
+		function setTheme(theme) {
+			document.documentElement.setAttribute('data-theme', theme);
+			themeController.checked = (theme === 'dark');
+			updateLogosForTheme(theme);
+			// Save the current theme preference to localStorage
+			localStorage.setItem('theme', theme);
 		}
-	
+
+		// Attempt to retrieve the saved theme from localStorage
+		const savedTheme = localStorage.getItem('theme') || (systemPrefersDark ? 'dark' : 'valentine');
+
+		// Set the initial theme based on localStorage or system preference
+		setTheme(savedTheme);
+
 		// Listen for changes on the checkbox to manually switch themes
 		themeController.addEventListener('change', function() {
 			if (this.checked) {
-				document.documentElement.setAttribute('data-theme', 'dark');
-				updateLogosForTheme('dark');
+				setTheme('dark');
 			} else {
-				document.documentElement.setAttribute('data-theme', 'valentine');
-				updateLogosForTheme('valentine');
+				setTheme('valentine');
 			}
 		});
 	});
-	</script>
-	
+</script>
