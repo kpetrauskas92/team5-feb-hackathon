@@ -4,34 +4,35 @@
 {% block head_title %}Event List{% endblock %}
 
 {% block content %}
+
+<!-- Add New Event Button FOR TESTING -->
+<div class="my-4 flex justify-center">
+    <a href="{% url 'create_event_post' %}" class="btn btn-primary">
+        Create New Event Post
+    </a>
+</div>
+
 <!-- Event Entries Column -->
 <div class="mt-3 flex flex-wrap">
     {% for eventpost in eventpost_list %}
-    <!-- Tailwind uses flex and width utilities instead of col-* -->
+
     <div class="w-full md:w-1/2 px-4 mb-4">
         <div class="bg-white rounded-lg overflow-hidden shadow-lg">
             <div class="p-4">
                 <div class="mb-4">
                     {% if "placeholder" in eventpost.image.url %}
                     <img class="w-full h-auto"
-                        src="{% static 'images/placeholder.webp' %}"
+                        src="{% static 'elements/placeholders/post_placeholder.webp' %}"
                         alt="placeholder image">
                     {% else %}
                     <img class="w-full h-auto"
                         src=" {{ eventpost.image.url }}"
                         alt="{{ eventpost.event_name }}">
                     {% endif %}
-                    <div class="py-2">
-                        <p class="text-sm text-gray-700">Author:
-                            {{ recipepost.author }}</p>
-                    </div>
                 </div>
-                <a href="{% url 'eventpost_detail' eventpost.slug %}"
-                    class="block hover:text-blue-600">
-                    <h2 class="text-xl font-semibold mb-2">{{ eventpost.event_name }}</h2>
+                <a href="{% url 'event' eventpost.slug %}" class="block hover:text-blue-600">
+                    <h2 class="text-xl font-semibold mb-2 dark:text-black">{{ eventpost.event_name }}</h2>
                 </a>
-                <p class="text-gray-600 text-sm mt-2">Category:
-                    {{ eventpost.get_category_display }}</p>
             </div>
         </div>
     </div>

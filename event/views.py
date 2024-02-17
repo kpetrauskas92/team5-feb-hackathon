@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
+from django.contrib.auth.decorators import login_required
 from .models import EventPost
+from .forms import EventPostForm
 
-# Create your views here.
 
 class EventPostList(generic.ListView):
     """
@@ -17,14 +18,38 @@ class EventPostList(generic.ListView):
 def event_details(request, slug):
     queryset = EventPost.objects.filter(status=1)
     eventpost = get_object_or_404(queryset, slug=slug)
-    #comments = eventpost.comments.all().order_by("-created_on")
-    #comment_count = eventpost.comments.filter(approved=True).count()
-    #comment_form = CommentForm()
-    return render(request, 'event_details.html',
-        {
-            "eventpost": eventpost,
-            #"comments": comments,
-            #"comment_count": comment_count,
-            #"comment_form": comment_form,
-        },
-    )
+    return render(request, 'event/event_details.html', {"eventpost": eventpost})
+
+
+@login_required
+def create_event_post(request):
+    if request.method == 'POST':
+        form = EventPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            event_post = form.save(commit=False)
+            event_post.author = request.user
+            event_post.save()
+            return redirect('event', slug=event_post.slug)
+    else:
+        form = EventPostForm(initial={'status': 0})
+    return render(request, 'event/create_event_post.html', {'form': form})
+
+
+@login_required
+def update_event(request, slug):
+    eventpost = get_object_or_404(EventPost, slug=slug)
+
+    if request.user != eventpost.author:
+        return redirect('event', slug=slug)
+
+    if request.method == 'POST':
+        form = EventPostForm(request.POST, request.FILES, instance=eventpost)
+        if form.is_valid():
+            form.save()
+            return redirect('event', slug=eventpost.slug)
+    else:
+        form = EventPostForm(instance=eventpost)
+
+    return render(request, 'event/update_event_post.html',
+                  {'form': form,
+                   'eventpost': eventpost})
