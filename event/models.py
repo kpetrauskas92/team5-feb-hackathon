@@ -7,10 +7,11 @@ from cloudinary.models import CloudinaryField
 STATUS = ((0, "Draft"), (1, "Published"))
 
 CATEGORY = (("fodd_and_drink", "Food & Drink"),
-              ("art_and_culture", "Art & Culture"),
-              ("single_and_ready_to_mingle", "Single & ready to mingle"),
-              ("adventure", "Adventure"),
-              )
+            ("art_and_culture", "Art & Culture"),
+            ("single_and_ready_to_mingle", "Single & ready to mingle"),
+            ("adventure", "Adventure"),
+            )
+
 
 class EventPost(models.Model):
     """
@@ -23,7 +24,7 @@ class EventPost(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     desciption = models.TextField(max_length=10000, null=False, blank=False)
     category = models.CharField(max_length=50, choices=CATEGORY,
-                                 default="Adventure", blank=False)
+                                default="Adventure", blank=False)
     location = models.CharField(max_length=300, null=False, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
@@ -42,4 +43,3 @@ class EventPost(models.Model):
 
     def __str__(self):
         return f'{self.event_name} | added by {self.author}'
-

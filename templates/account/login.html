@@ -22,7 +22,7 @@
             </div>
 
             <!-- Form Section -->
-            <form class="card-body" action="login_url" method="POST">
+            <form class="card-body" method="POST">
                 {% csrf_token %}
                 {{ form|crispy }}
                 {% if redirect_field_value %}
