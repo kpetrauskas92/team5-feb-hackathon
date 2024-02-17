@@ -6,7 +6,8 @@
 
 {% block content %}
 
-<div class="container mx-auto mt-10 p-5 bg-white shadow-lg rounded-lg">
+<div class="mx-auto max-w-3xl mt-10 p-5 bg-white shadow-lg rounded-lg mb-10">
+
     <!-- Event image-->
     <div class="">
         {% if "placeholder" in eventpost.image.url %}
@@ -16,42 +17,45 @@
         <img src=" {{ eventpost.image.url }}" alt="{{ eventpost.event_name }}">
         {% endif %}
     </div>
-    <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ event.event_name }}
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ eventpost.event_name }}
     </h1>
-    <p class="text-xl text-gray-600"><strong>Location:</strong> {{ event.location }}</p>
+    <p class="text-xl text-gray-600"><strong>Location:</strong> {{ eventpost.location }}</p>
     <div class="mt-4 mb-4 p-2 bg-gray-50 rounded">
         <p class="text-lg text-gray-700"><strong>Description:</strong></p>
-        <p class="text-md text-gray-600">{{ event.description }}</p>
+        <p class="text-md text-gray-600">{{ eventpost.description }}</p>
         <p class="text-lg text-gray-700"><strong>Category:</strong></p>
-        <p class="text-md text-gray-600">{{ event.category }}</p>
+        <p class="text-md text-gray-600">{{ eventpost.category }}</p>
         <p class="text-lg text-gray-700"><strong>Author:</strong></p>
-        <p class="text-md text-gray-600">{{ event.author }}</p>
+        <p class="text-md text-gray-600">{{ eventpost.author }}</p>
         <p class="text-lg text-gray-700"><strong>Updated:</strong></p>
-        <p class="text-md text-gray-600">{{ event.updated_on }}</p>
+        <p class="text-md text-gray-600">{{ eventpost.updated_on }}</p>
     </div>
+
     <!-- Update and delete event -->
     {% if user.is_authenticated and eventpost.author == user %}
-    <button class="" data-eventpost_id="{{ eventpost.id }}"
+    <button class="dark:text-black btn btn-ghost" data-eventpost_id="{{ eventpost.id }}"
         data-update_url="{% url 'update_event' slug=eventpost.slug %}">Update
         Event</button>
-    <button class="" data-eventpost_id="{{ eventpost.id }}"
+    <button class="dark:text-black btn btn-ghost" data-eventpost_id="{{ eventpost.id }}"
         data-eventpost_slug="{{ eventpost.slug }}">Delete Event</button>
     {% endif %}
+
     <!-- Comment count -->
-    <div class="">
-        <strong class="">
+    <div class="dark:text-black">
+        <strong class="dark:text-black">
             <i class="far fa-comments"></i> {{ comment_count }}
         </strong>
     </div>
-    <div class="">
+
+    <div class="dark:text-black">
         <h3>Comments:</h3>
-        <div class="">
+        <div class="dark:text-black">
             {% for comment in comments %}
                 <div class="{% if not comment.approved %}{% if comment.author == user %}opacity-50{% else %}hidden{% endif %}{% endif %}">
                     <!-- Comment content -->
                     <p class="">
                         {{ comment.author }}
-                        <span class="">
+                        <span class="dark:text-black">
                             {{ comment.created_on }}
                         </span> wrote:
                     </p>
@@ -66,13 +70,13 @@
                     </p>
                 {% endif %}
                 {% if user.is_authenticated and comment.author == user %}
-                    <button class="" data-comment_id="{{ comment.id }}">Delete</button>
-                    <button class="" data-comment_id="{{ comment.id }}">Edit</button>
+                    <button class="dark:text-black" data-comment_id="{{ comment.id }}">Delete</button>
+                    <button class="dark:text-black" data-comment_id="{{ comment.id }}">Edit</button>
                 {% endif %}
             {% endfor %}
         </div>
     <!--Create comment-->
-    <div class="">
+    <div class="dark:text-black">
         {% if user.is_authenticated %}
         <h3>Leave a comment:</h3>
         <form id="commentForm" method="post">
@@ -86,8 +90,8 @@
       </div>
       <!-- Delete confirmation modal needs to be added here but unsure of how to in Tailwind-->
 </div>
-<a href=""
-    class="text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out">Back
+<a href="{% url 'event_list' %}"
+    class="btn btn-primary">Back
     to Events List</a>
 </div>
 
