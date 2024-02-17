@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import EventPost
 from django.http import HttpResponseForbidden
-from .forms import EventPostForm
+from .forms import EventPostForm, CommentForm
 from django.contrib import messages
 
 
@@ -20,7 +20,27 @@ class EventPostList(generic.ListView):
 def event_details(request, slug):
     queryset = EventPost.objects.filter(status=1)
     eventpost = get_object_or_404(queryset, slug=slug)
-    return render(request, 'event/event_details.html', {"eventpost": eventpost})
+    comments = eventpost.comments.all().order_by("-created_at")
+    new_comment = None
+
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.event_post = eventpost
+            new_comment.user = request.user
+            new_comment.save()
+            messages.success(request, 'Your comment has been added!')
+    else:
+        comment_form = CommentForm()
+
+    return render(request, 'event/event_details.html', {
+        "eventpost": eventpost,
+        "comments": comments,
+        "new_comment": new_comment,
+        "comment_form": comment_form
+    })
 
 
 @login_required
@@ -28,7 +48,8 @@ def create_event_post(request):
     if request.method == 'POST':
         form = EventPostForm(request.POST, request.FILES)
         if form.is_valid():
-            messages.success(request, 'Your event post has been created successfully!')
+            messages.success(request,
+                             'Your event post has been created successfully!')
             event_post = form.save(commit=False)
             event_post.author = request.user
             event_post.save()
@@ -50,7 +71,8 @@ def update_event(request, slug):
         form = EventPostForm(request.POST, request.FILES, instance=eventpost)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your event post has been updated successfully!')
+            messages.success(request,
+                             'Your event post has been updated successfully!')
             return redirect('event', slug=eventpost.slug)
     else:
         form = EventPostForm(instance=eventpost)
@@ -70,7 +92,8 @@ def delete_event(request, slug):
 
     if request.method == 'POST':
         eventpost.delete()
-        messages.success(request, 'The event post has been deleted successfully.')
+        messages.success(request,
+                         'The event post has been deleted successfully.')
         return redirect('event_list')
 
     # Render the confirmation page for GET requests
