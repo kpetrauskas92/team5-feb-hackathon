@@ -31,6 +31,7 @@
 			</div>
 			<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 				{% if user.is_authenticated %}
+					<li><a href="{% url 'profile' %}">Profile</a></li>
 					<li><a href="{% url 'account_logout' %}">Logout</a></li>
 				{% else %}
 					<li><a href="{% url 'account_login' %}">Login</a></li>
@@ -46,9 +47,10 @@
 				</svg>
 			</div>
 			<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-				<li><a>Events</a></li>
-				<li><a>Calendar</a></li>
+				<li><a href="{% url 'event_list' %}">Valentine Ideas</a></li>
+				<li><a>FAQ's</a></li>
 				<li><a href="{% url 'about' %}">About CHC</a></li>
+				<li><a>Contact us</a></li>
 			</ul>
 		</div>
 
