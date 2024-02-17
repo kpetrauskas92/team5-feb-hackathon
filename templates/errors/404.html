@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tailwind_filters %}
+
+{% block head_title %}404{% endblock %}
+
+{% block content %}
+
+<div class="text-center">
+    <h1 class="text-4xl font-bold text-center my-12">404</h1>
+    <div class="p-6">
+        <p class="text-gray-800">Oops! The page you're looking for doesn't exist.</p>
+    </div>
+    <a href="{% url 'index' %}">
+        <button class="btn btn-primary">Go back to the homepage</button>
+    </a>
+</div>
+
+{% endblock %}
