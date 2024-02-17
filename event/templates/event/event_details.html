@@ -31,6 +31,7 @@
         <p class="text-md text-gray-600">{{ eventpost.updated_on }}</p>
         <!-- Update and delete event -->
     {% if user.is_authenticated and eventpost.author == user %}
+      
     <a href="{% url 'update_event' slug=eventpost.slug %}" class="btn btn-sm btn-secondary">
         Edit
     </a>
