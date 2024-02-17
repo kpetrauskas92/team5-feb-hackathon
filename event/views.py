@@ -10,7 +10,7 @@ class EventPostList(generic.ListView):
     Django's ListView.
     """
     queryset = EventPost.objects.filter(status=1)
-    template_name = "eventlist.html"
+    template_name = "event/eventlist.html"
     paginate_by = 4
 
 
