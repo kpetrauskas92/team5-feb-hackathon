@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'landing',
     'event',
-    'profiles',
+    'profiles.apps.ProfilesConfig',
 
     # Other apps
     "crispy_forms",
