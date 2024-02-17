@@ -1,7 +1,18 @@
 from django.shortcuts import render, get_object_or_404
+from django.views import generic
 from .models import EventPost
 
 # Create your views here.
+
+class EventPostList(generic.ListView):
+    """
+    A view that displays a list of published EventPosts using
+    Django's ListView.
+    """
+    queryset = EventPost.objects.filter(status=1)
+    template_name = "eventlist.html"
+    paginate_by = 4
+
 
 def event_details(request, slug):
     queryset = EventPost.objects.filter(status=1)
