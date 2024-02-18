@@ -35,7 +35,11 @@
     <a href="{% url 'update_event' slug=eventpost.slug %}" class="btn btn-sm btn-secondary">
         Edit
     </a>
-    <a href="{% url 'delete_event' slug=eventpost.slug %}" class="btn btn-sm btn-secondary">
+    <a href="{% url 'delete_event' slug=eventpost.slug %}"
+        class="btn btn-sm btn-secondary"
+        hx-get="{% url 'delete_event' slug=eventpost.slug %}"
+		hx-target="#my_modal_3 .modal-box"
+		onclick="my_modal_3.showModal()">
         Delete
     </a>
     {% endif %}
