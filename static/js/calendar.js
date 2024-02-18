@@ -1,32 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const calendarEl = document.getElementById('calendar');
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth();
+    var calendarEl = document.getElementById('calendar');
+    var iconPath = calendarEl.getAttribute('data-icon-path');
+    var userDates = JSON.parse(calendarEl.getAttribute('data-events'));
 
-    let displayYear = currentYear;
-    if (currentMonth > 1 && currentMonth < 8) { 
-        displayYear += 1;
-    }
+    var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    // Detect dark mode preference
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    const calendar = new FullCalendar.Calendar(calendarEl, {
+    var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        initialDate: `${displayYear}-02-01`,
+        titleFormat: { year: 'numeric', month: 'long' },
         headerToolbar: {
-            start: '', // Remove left buttons
-            center: 'title',
-            end: '' // Remove right buttons
+            start: 'title',
+            center: '',
+            end: 'prev,next'
         },
-        // Customize the month text format
-        titleFormat: { year: 'numeric', month: 'long' }
+        events: userDates,
+        eventContent: function(arg) {
+            var element = document.createElement('div');
+            element.classList.add('event-icon');
+            element.innerHTML = `<img src="${iconPath}" alt="Event Icon">`;
+            return { domNodes: [element] };
+        }
     });
+
     calendar.render();
 
     // Apply dark mode specific styles if preferred
     if (prefersDarkMode) {
-        document.querySelector('.fc-header-toolbar').style.color = 'black';
+        document.querySelector('.fc-header-toolbar').classList.add('dark-mode');
     }
 });

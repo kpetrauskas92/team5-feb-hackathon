@@ -17,6 +17,25 @@ h1, h2, h3, p, a {
 
 /* Calendar Styles */
 
+
+.fc .event-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
+}
+
+.fc .event-icon img {
+    max-width: 35px;
+    max-height: 35px;
+    margin: 0 auto;
+}
+
+.fc-event {
+    background: transparent;
+    border: none;
+}
+
 .fc-header-toolbar {
     color: black;
 }
