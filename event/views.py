@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .models import EventPost
+from .models import EventPost, CATEGORY
 from django.http import HttpResponseForbidden
 from .forms import EventPostForm
 from django.contrib import messages
+from django.db.models import Count
 
 
 class EventPostList(generic.ListView):
@@ -15,6 +16,18 @@ class EventPostList(generic.ListView):
     queryset = EventPost.objects.filter(status=1)
     template_name = "event/eventlist.html"
     paginate_by = 4
+
+    def get_queryset(self):
+        category_key = self.request.GET.get('category', '')
+        queryset = EventPost.objects.annotate(likes_count=Count('likes')).order_by('-likes_count')
+        if category_key:
+            queryset = queryset.filter(category=category_key)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_choices'] = CATEGORY
+        return context
 
 
 def event_details(request, slug):
