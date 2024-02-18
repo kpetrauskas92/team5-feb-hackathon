@@ -3,7 +3,7 @@ from django.views import generic
 from django.contrib.auth.decorators import login_required
 from .models import EventPost
 from django.http import HttpResponseForbidden
-from .forms import EventPostForm, CommentForm
+from .forms import EventPostForm
 from django.contrib import messages
 
 
@@ -20,26 +20,9 @@ class EventPostList(generic.ListView):
 def event_details(request, slug):
     queryset = EventPost.objects.filter(status=1)
     eventpost = get_object_or_404(queryset, slug=slug)
-    comments = eventpost.comments.all().order_by("-created_at")
-    new_comment = None
-
-    # Comment posted
-    if request.method == 'POST':
-        comment_form = CommentForm(data=request.POST)
-        if comment_form.is_valid():
-            new_comment = comment_form.save(commit=False)
-            new_comment.event_post = eventpost
-            new_comment.user = request.user
-            new_comment.save()
-            messages.success(request, 'Your comment has been added!')
-    else:
-        comment_form = CommentForm()
 
     return render(request, 'event/event_details.html', {
         "eventpost": eventpost,
-        "comments": comments,
-        "new_comment": new_comment,
-        "comment_form": comment_form
     })
 
 
