@@ -213,6 +213,7 @@ _Footer_
 - [Procreate](https://procreate.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [DaisyUi](https://daisyui.com/)
+- [Iconify](https://iconify.design/)
 
 
 ## Credits
