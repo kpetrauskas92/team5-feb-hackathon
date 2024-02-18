@@ -75,15 +75,22 @@ Brought to you by the [**Code Hearted Crew**](#code-hearted-crew)
     - Allows users to switch the website's appearance to dark mode.
 #### Login/Registration Page:
     - Allows users to Login or Sign Up.
+
 #### Menu:
+
 #### Valentine Ideas Page:
     - A dedicated section for Valentine's Day, featuring unique and creative ideas for dates and gifts, helping users celebrate the occasion in memorable ways.
-#### FAQ Page:
-    - Provides answers to commonly asked questions, helping users navigate the platform and plan their romantic events more efficiently.
-#### About CHC (Code Hearted Crew) Page: 
+
+#### Meet the Team Page: 
     - Shares insights into LoveSched's team.
-#### Contact Page:
+
+#### Contact us Page:
     - Offers straightforward access for users to reach out for support.
+
+#### Terms of Service:
+    - Our Terms of Service outline simple rules and guidelines to ensure a smooth experience, covering user conduct and privacy.
+
+
 
 
 ### Research
@@ -96,7 +103,7 @@ The following sites were discussed as inspiration.
 [**Back to top**](#love-sched)
 
 ### Wireframes
-- <img src="docs\images\wf-landing-page.png" width="700" alt="image of wireframe">
+- <img src="docs/images/wf-landing-page.png" width="700" alt="image of wireframe">
 - ...
 - ...
 
@@ -104,31 +111,75 @@ The following sites were discussed as inspiration.
 ![An image of the project colour scheme](/docs/images/colour-scheme.png)
 
 ### Typography
-- #### Background
-  A background image...
-
-
 
 - #### Fonts
-    - 
+    - Our choice of font was [Raleway ](https://fonts.google.com/specimen/Raleway?utm_source=fontsNinja&utm_medium=browserExtension&utm_campaign=foundryLinkAction).This font choice was imported from [Google Fonts](https://fonts.google.com/).
 
 
 ## Features
+
 ### Fully responsive
 - This site adapts to all devices and screen sizes ranging between 320px - ###px wide.
+
 ### Light & Dark modes
-- Users can toggle between light and dark mode to suit their visual preferences.  
-### Next Feature ....
+- Users can toggle between light and dark mode to suit their visual preferences. 
+<details><summary>Screenshots</summary>
+
+<img src="docs/images/ss-light-mode.png">
+<img src="docs/images/ss-dark-mode.png">
+_Light/Dark_
+
+</details> 
+
+### Menu
+- The navbar shows Valentine Ideas, Meet the Team,Contact us and Terms of Service
+<details><summary>Screenshots</summary>
+
+<img src="docs/images/SS-menu.png">
+
+_Menu_
+
+</details>
+
+### Login/Register
+ - Allows users to Login or Sign Up.
+<details><summary>Screenshots</summary>
+
+<img src="docs/images/SS-Login-Register.png">
+<img src="docs/images/login-ss.png">
+<img src="docs/images/register-ss.png">
+_Login/Register_
+
+</details>
+
+### Footer
+<details><summary>Screenshots</summary>
+
+<img src="docs/images/footer-ss.png">
+_Footer_
 
 ## Future Features
-- ...
+- Comments are planned as a future feature to enhance the cleanliness and organization of the ideas page, pending the implementation of a comment approval process.
 - ...
 
 ## Testing
 - Please see full documentation for testing and bug reports [here](testing.md)
 
 ## Deployment
-- ### Github Pages
+- #### Deployment Heroku
+
+    This project was deployed using Heroku:
+
+1. Create a new app with the name .
+2. Linked the app to its Github repository.
+3. Verify that the project has an up to date Procfile and requirements.txt
+4. Push the project to the Heroku remote.
+5. Set the SECRET_KEY environmental variable in the Heroku config vars.
+6. Set the IP to 0.0.0.0 and the PORT to 5000 in the Heroku config vars.
+7. Set the MONGO_URI environmental variable in the Heroku config vars.
+8. Restart all dynos.
+9. Open the app on Heroku and check to ensure that it's working correctly.
+
 
 - #### Fork a Repository
 1. Find the repository you want to fork
