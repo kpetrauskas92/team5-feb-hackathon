@@ -65,18 +65,3 @@ class Like(models.Model):
 
     class Meta:
         unique_together = ('user', 'event_post')
-
-
-class Comment(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name='comments',
-        on_delete=models.CASCADE
-    )
-    event_post = models.ForeignKey(
-        EventPost,
-        related_name='comments',
-        on_delete=models.CASCADE
-    )
-    comment = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)

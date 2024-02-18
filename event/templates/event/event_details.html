@@ -6,7 +6,17 @@
 
 {% block content %}
 
-<div class="mx-auto max-w-3xl mt-10 p-5 bg-white shadow-lg rounded-lg mb-10">
+<div class="mx-auto max-w-2xl my-4">
+    <a href="{% url 'event_list' %}"
+        class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+          
+        Back to Ideas
+    </a>
+</div>
+<div class="mx-auto max-w-2xl mt-6 p-5 bg-white shadow-lg rounded-lg mb-10">
 
     <!-- Event image-->
     <div class="">
@@ -23,8 +33,6 @@
     <div class="mt-4 mb-4 p-2 bg-gray-50 rounded">
         <p class="text-lg text-gray-700"><strong>Description:</strong></p>
         <p class="text-md text-gray-600">{{ eventpost.description }}</p>
-        <p class="text-lg text-gray-700"><strong>Category:</strong></p>
-        <p class="text-md text-gray-600">{{ eventpost.category }}</p>
         <p class="text-lg text-gray-700"><strong>Author:</strong></p>
         <p class="text-md text-gray-600">{{ eventpost.author }}</p>
         <p class="text-lg text-gray-700"><strong>Updated:</strong></p>
@@ -44,62 +52,6 @@
     </a>
     {% endif %}
     </div>
-
-    <!-- Comment count -->
-    <div class="dark:text-black">
-        <strong class="dark:text-black">
-            <i class="far fa-comments"></i> {{ comment_count }}
-        </strong>
-    </div>
-
-    <div class="dark:text-black">
-        <h3>Comments:</h3>
-        <div class="dark:text-black">
-            {% for comment in comments %}
-                <div class="{% if not comment.approved %}{% if comment.author == user %}opacity-50{% else %}hidden{% endif %}{% endif %}">
-                    <!-- Comment content -->
-                    <p class="">
-                        {{ comment.author }}
-                        <span class="dark:text-black">
-                            {{ comment.created_on }}
-                        </span> wrote:
-                    </p>
-                    <div id="comment{{ comment.id }}">
-                        {{ comment.body | linebreaks }}
-                    </div>
-                </div>
-                <!-- Edit and delete comment -->
-                {% if not comment.approved and comment.author == user %}
-                    <p>
-                        This comment is awaiting approval
-                    </p>
-                {% endif %}
-                {% if user.is_authenticated and comment.author == user %}
-                    <button class="dark:text-black" data-comment_id="{{ comment.id }}">Delete</button>
-                    <button class="dark:text-black" data-comment_id="{{ comment.id }}">Edit</button>
-                {% endif %}
-            {% endfor %}
-        </div>
-
-    <!--Create comment-->
-    <div class="dark:text-black">
-        {% if user.is_authenticated %}
-        <h3>Leave a comment:</h3>
-        <form id="commentForm" method="post">
-            {{ comment_form|crispy }}
-            {% csrf_token %}
-            <button type="submit" class="btn btn-ghost">Submit</button>
-        </form>
-        {% else %}
-            <p>Log in to leave a comment</p>
-        {% endif %}
-    </div>
-
-<!-- Delete confirmation modal needs to be added here but unsure of how to in Tailwind-->
-</div>
-<a href="{% url 'event_list' %}"
-    class="btn btn-primary">Back
-    to Events List</a>
 </div>
 
 
