@@ -13,7 +13,7 @@ module.exports = {
       "valentine",
       {
         mytheme: {
-          "primary": "#f637f3",
+          "primary": "#f6e7f3",
           "secondary": "#a24c6f",
           "accent": "#78afb2",
           "neutral": "#ffffff",
@@ -33,8 +33,3 @@ module.exports = {
   },
 };
 
-// #f637f3 = light pink 
-// #a24c6f = plum
-// #5c2f3b = brown 
-// #a592f0 = lavendar
-// #78afb2 = green 
