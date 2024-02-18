@@ -27,9 +27,10 @@ The site has been tested at screen sizes 320px to ###px in width.
 ## ***Bugs and Fixes:***
 1. **ISSUE NAME** - 
     * ***Issue Found:*** 
-        * ...
+        * Forms did not behave as expected in development. When data was entered and submitted the CSRF verification failed message was displayed as "CSRF verification failed. Request aborted".
     * ***Solution Used:*** 
-        * ...
+        * This was becasue the host address was not added to settings.py for CSRF_TRUSTED_ORIGINS in the following format: 
+        `CSRF_TRUSTED_ORIGINS = ['https://...']`
 
 2. **ISSUE NAME** - 
     * ***Issue Found:*** 
