@@ -16,10 +16,6 @@
     </a>
 </div>
 <div class="divider divider-primary">Filter By Category
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" />
-      </svg>
-      
 </div>
 
     <div class="mb-4 flex justify-center px-4">
@@ -53,13 +49,20 @@
                         {% endif %}
                     </a>
                 </div>
-                <a href="{% url 'event' eventpost.slug %}" class="block hover:text-blue-600 text-center">
-                    <h2 class="text-xl font-semibold mb-2 dark:text-black">{{ eventpost.event_name }}</h2>
-                </a>
+                    <h2 class="text-xl font-semibold dark:text-black pt-2">
+                        {{ eventpost.event_name }}
+                    </h2>
+                <div class="divider divider-primary"></div>
                 <p class="dark:text-gray-800 mb-4">{{ eventpost.description|truncatechars:150 }}</p>
                 <!-- Add a view button at the bottom -->
                 <div class="text-center">
-                    <a href="{% url 'event' eventpost.slug %}" class="btn btn-primary">View This Idea</a>
+                    <a href="{% url 'event' eventpost.slug %}" class="btn btn-primary">
+                        View This Idea
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>

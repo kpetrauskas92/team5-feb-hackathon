@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import handler404
+from .views import handler404, handler403, handler500
 
 urlpatterns = [
     path('', include('event.urls')),
@@ -35,3 +35,5 @@ if settings.DEBUG:
                           document_root=settings.MEDIA_ROOT)
 
 handler404 = 'lovesched.views.handler404'
+handler403 = 'lovesched.views.handler403'
+handler500 = 'lovesched.views.handler500'
