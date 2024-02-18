@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
 
 <section class="grid grid-cols-1 gap-4 mx-auto max-w-5xl">
-    <h2 class="text-2xl text-center font-bold">Terms of Service</h2>
+    <h2 class="text-2xl mt-4 text-center font-bold">Terms of Service</h2>
+    <!-- Light Mode Icon-->
+    <div class="logo-lightmode mx-auto h-8 w-8">
+        <img class="object-contain" src="{% static 'elements/icons/lovesched-logo-icon-lightmode.svg' %}" aria="false">
+    </div>
+    <!-- Dark Mode Icon-->
+    <div class="logo-darkmode mx-auto h-8 w-8">
+        <img class="object-contain" src="{% static 'elements/icons/lovesched-logo-icon-darkmode.svg' %}" aria="false">
+    </div>
     <div class="divider"></div>
     <p class="font-bold">Welcome to Love Sched! These Terms of Service govern your access to and use of our website, including any content, functionality, and services offered on or through Love Sched. By accessing or using the Services, you agree to be bound by these Terms of Service</p>
     <div class="divider"></div>
@@ -35,7 +44,7 @@
     <h3 class="font-bold">10. Changes to Terms</h3>
     <p >We reserve the right to modify or update these Terms of Service at any time. Your continued use of the Services after any such changes constitutes your acceptance of the new Terms of Service.</p>
     <p class=" text-center font-bold">Please contact us if you have any questions about these Terms of Service</p>
-    <a href="{% url 'contact_us' %}" class="btn btn-primary font-bold w-32 flex justify-center items-center">Contact us</a>
+    <a href="{% url 'contact_us' %}" class="btn btn-primary mb-4 mx-auto font-bold w-32 flex justify-center items-center">Contact us</a>
 </section>
 
 
