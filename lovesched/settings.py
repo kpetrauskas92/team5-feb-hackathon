@@ -52,6 +52,7 @@ ALLOWED_HOSTS = ['127.0.0.1',
 #     'https://8000-kpetrauskas-team5febhac-tcpdrjy1di1.ws-eu108.gitpod.io'
 # ]
 
+
 CSRF_COOKIE_SECURE = True
 
 SESSION_COOKIE_SECURE = True
