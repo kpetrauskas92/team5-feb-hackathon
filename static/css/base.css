@@ -10,6 +10,24 @@ body {
     margin: 0;
 }
 
+/* Calendar Styles */
+
+.fc-header-toolbar {
+    color: black;
+}
+
+.fc-daygrid-day-top {
+    color: black;
+}
+
+.fc-daygrid-day {
+    border-color: #e0e0e0;
+}
+
+.fc-day {
+    color: black;
+}
+
 /* About us cards styles */
 
 .grow-on-hover:hover {

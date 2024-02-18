@@ -1,19 +1,94 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load tailwind_filters %}
-
-{% block head_title %}Profile Page{% endblock %}
 
 {% block content %}
+<div class="container flex flex-wrap md:flex-nowrap mt-10 mx-auto max-w-5xl">
+    <!-- Sidebar (Profile Info) -->
+    <div class="w-full md:w-1/4 p-4 bg-gray-100 rounded-lg shadow-lg">
+        <div class="mb-4 flex justify-center">
+            <img src="{% static 'elements/placeholders/profile_placeholder.png' %}" alt="Profile Image" class="rounded-full w-32 h-32 object-cover">
+        </div>
+        <h2 class="text-lg font-semibold text-center"> Hi {{ request.user.username }} !</h2>
+        <hr>
+        <div>
+            <p class="font-bold mt-4">Upcoming Events:</p>
+        </div>
+    </div>
+   
+    <!-- Main Content (Posts & Suggested Posts) -->
+    <div class="w-full md:w-3/4 p-4">
+        <div class="collapse collapse-arrow bg-primary my-2">
+            <input type="checkbox" /> 
+            <div class="collapse-title text-xl">
+              My Calendar
+            </div>
+            <div class="collapse-content bg-white"> 
+                <div id='calendar'></div>
+            </div>
+          </div>
+        <!-- Toggle Buttons -->
+        <div class="mb-4">
+            <button id="myPostsTab" class="btn btn-primary">My Ideas</button>
+            <button id="suggestedPostsTab" class="btn btn-primary">Suggested Ideas</button>
+        </div>
+    
+        <h3 class="text-xl font-semibold mb-3">My Posts</h3>
+        <div id="myPosts" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {% for post in user_posts %}
+            <div class="mb-4 p-4 bg-white shadow rounded h-full flex flex-col">
+                <h4 class="font-bold">{{ post.event_name }}</h4>
+                {% if post.image %}
+                <img src="{% if 'placeholder' in post.image.url %}{% static 'elements/placeholders/post_placeholder.webp' %}{% else %}{{ post.image.url }}{% endif %}" alt="{{ post.event_name }}"
+                     class="mb-2 flex-grow">
+                {% endif %}
+                <p>{{ post.description|truncatechars:100 }}</p>
 
-<div class="container mx-auto mt-10 p-5 bg-white shadow-lg rounded-lg">
-    <h1>This is the profile page for {{user.first_name}}</h1>
-</div>
-    <a href=""
-        class="text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out">
-        Back to Events List
-    </a>
+
+                {% if post.status == 1 %}
+                <span class="text-green-600 font-semibold">Public</span>
+                {% else %}
+                <span class="text-red-600 font-semibold">Private</span>
+                {% endif %}
+
+            </div>
+            {% empty %}
+            <p>No posts to show.</p>
+            {% endfor %}
+        </div>
+    
+        <h3 class="text-xl font-semibold mb-3" style="display: none;">Suggested Posts</h3>
+        <div id="suggestedPosts" class="grid grid-cols-1 md:grid-cols-2 gap-4" style="display: none;">
+            {% for post in suggested_posts %}
+            <div class="mb-4 p-4 bg-white shadow rounded h-full flex flex-col">
+                <h4 class="font-bold">{{ post.event_name }}</h4>
+                <p>{{ post.description }}</p>
+            </div>
+            {% empty %}
+            <p>No suggested posts to show.</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const myPostsTab = document.getElementById('myPostsTab');
+        const suggestedPostsTab = document.getElementById('suggestedPostsTab');
+        const myPosts = document.getElementById('myPosts');
+        const suggestedPosts = document.getElementById('suggestedPosts');
+
+        myPostsTab.addEventListener('click', function() {
+            myPosts.style.display = 'grid';
+            suggestedPosts.style.display = 'none';
+        });
+
+        suggestedPostsTab.addEventListener('click', function() {
+            myPosts.style.display = 'none';
+            suggestedPosts.style.display = 'grid';
+        });
+    });
+</script>
 
 {% endblock %}
