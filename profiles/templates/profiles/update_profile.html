@@ -1,39 +1,37 @@
-{% extends 'base.html' %}
 {% load static %}
 {% load tailwind_filters %}
 
+
 {% block content %}
-<div class="container flex flex-wrap md:flex-nowrap mt-10 mx-auto max-w-5xl">
-    <div class="w-full md:w-1/4 p-4 bg-gray-100 rounded-lg shadow-lg">
-        <h2 class="text-lg font-semibold text-center"> Hi {{ request.user.username }}!</h2>
-        <p class="font-semibold text-center">You can update your details or delete your profile.</p>
-        <div class="mb-4 flex justify-center">
-            {% if "placeholder" in userprofile.image.url %}
-            <img src="{% static 'elements/placeholders/profile_placeholder.png' %}" alt="Profile Image" class="rounded-full w-32 h-32 object-cover">
-            {% else %}
-            <img src=" {{ userprofile.image.url }}" alt="Profile Image" class="rounded-full w-32 h-32 object-cover">
-            {% endif %}
-        </div>
-        <div class="mb-4 flex justify-center">
-            <form method="POST" action="{% url 'update_profile' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                {% for field in form %}
-                    {% if field.name != 'image' %}
-                        {{ field | as_crispy_field }}
-                    {% else %}
-                        {{ field }}
-                    {% endif %}
-                {% endfor %}   
-            </form>
-        </div>
-        <div class="mb-4 flex justify-center">
-            <a href="">
-                <button class="btn btn-primary">Back</button>
-            </a>
-            <button class="btn btn-primary" type="submit">Update</button>
-            <button class="btn btn-primary" type="submit">Delete</button>
-        </div>
-    </div>
-</div>
+
+<!-- Main content -->
+<section aria-labelledby="update_profile_titlte">
+
+	<!-- Close Button -->
+	<button type="button"
+			aria-label="Close Sign Out Modal"
+			class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+			onclick="document.getElementById('my_modal_3').close();">
+		<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+		</svg>
+	</button>
+
+	<!-- Heading -->
+	<h1 id="update_profile_titlte" class="text-2xl font-bold my-2 text-center">Update Profile</h1>
+
+	<!-- Confirmation Message -->
+	<p class="text-center my-4">You can update your details here</p>
+
+
+	<!-- Form Section -->
+    <form method="POST" action="{% url 'update_profile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn w-full btn-primary" type="submit">Update</button>
+    </form>
+
+    
+</section>
 
 {% endblock %}
