@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head_title %}Contact Us{% endblock %}
+
+{% block content %}
+<div class="flex justify-center">
+    <div class="w-full md:w-1/2 my-20">
+        <h2 class="text-2xl font-semibold leadi text-center">Let's Make Magic
+            Together</h2>
+        <p>Our platform is more than just a website; it's a beacon for romance,
+            a place where every user has the opportunity to make a real
+            difference in someone else's romantic life. Our website is more
+            than just a platform; it's a place where passion
+            meets purpose, and where every user has the chance to make a real
+            difference in someone elses romantic life. Every suggestion, piece
+            of feedback, and improvement you propose helps us make LoveSched an
+            extraordinary website. Join us in shaping a platform that could
+            spark countless love stories by enhancing its functionality.</p>
+        <!-- Contact form -->
+        <form method="post">
+            {{ contact_form | crispy }}
+            {% csrf_token %}
+            <button type="submit"
+                class="px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-700">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

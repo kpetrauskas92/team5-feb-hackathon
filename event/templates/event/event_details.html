@@ -6,89 +6,52 @@
 
 {% block content %}
 
-<div class="container mx-auto mt-10 p-5 bg-white shadow-lg rounded-lg">
+<div class="mx-auto max-w-2xl my-4">
+    <a href="{% url 'event_list' %}"
+        class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+          
+        Back to Ideas
+    </a>
+</div>
+<div class="mx-auto max-w-2xl mt-6 p-5 bg-white shadow-lg rounded-lg mb-10">
+
     <!-- Event image-->
     <div class="">
         {% if "placeholder" in eventpost.image.url %}
-        <img src="{% static 'images/placeholder.webp' %}"
+        <img src="{% static 'elements/placeholders/post_placeholder.webp' %}"
             alt="placeholder image">
         {% else %}
         <img src=" {{ eventpost.image.url }}" alt="{{ eventpost.event_name }}">
         {% endif %}
     </div>
-    <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ event.event_name }}
+    <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ eventpost.event_name }}
     </h1>
-    <p class="text-xl text-gray-600"><strong>Location:</strong> {{ event.location }}</p>
+    <p class="text-xl text-gray-600"><strong>Location:</strong> {{ eventpost.location }}</p>
     <div class="mt-4 mb-4 p-2 bg-gray-50 rounded">
         <p class="text-lg text-gray-700"><strong>Description:</strong></p>
-        <p class="text-md text-gray-600">{{ event.description }}</p>
-        <p class="text-lg text-gray-700"><strong>Category:</strong></p>
-        <p class="text-md text-gray-600">{{ event.category }}</p>
+        <p class="text-md text-gray-600">{{ eventpost.description }}</p>
         <p class="text-lg text-gray-700"><strong>Author:</strong></p>
-        <p class="text-md text-gray-600">{{ event.author }}</p>
+        <p class="text-md text-gray-600">{{ eventpost.author }}</p>
         <p class="text-lg text-gray-700"><strong>Updated:</strong></p>
-        <p class="text-md text-gray-600">{{ event.updated_on }}</p>
-    </div>
-    <!-- Update and delete event -->
+        <p class="text-md text-gray-600">{{ eventpost.updated_on }}</p>
+        <!-- Update and delete event -->
     {% if user.is_authenticated and eventpost.author == user %}
-    <button class="" data-eventpost_id="{{ eventpost.id }}"
-        data-update_url="{% url 'update_event' slug=eventpost.slug %}">Update
-        Event</button>
-    <button class="" data-eventpost_id="{{ eventpost.id }}"
-        data-eventpost_slug="{{ eventpost.slug }}">Delete Event</button>
+      
+    <a href="{% url 'update_event' slug=eventpost.slug %}" class="btn btn-sm btn-secondary">
+        Edit
+    </a>
+    <a href="{% url 'delete_event' slug=eventpost.slug %}"
+        class="btn btn-sm btn-secondary"
+        hx-get="{% url 'delete_event' slug=eventpost.slug %}"
+		hx-target="#my_modal_3 .modal-box"
+		onclick="my_modal_3.showModal()">
+        Delete
+    </a>
     {% endif %}
-    <!-- Comment count -->
-    <div class="">
-        <strong class="">
-            <i class="far fa-comments"></i> {{ comment_count }}
-        </strong>
     </div>
-    <div class="">
-        <h3>Comments:</h3>
-        <div class="">
-            {% for comment in comments %}
-                <div class="{% if not comment.approved %}{% if comment.author == user %}opacity-50{% else %}hidden{% endif %}{% endif %}">
-                    <!-- Comment content -->
-                    <p class="">
-                        {{ comment.author }}
-                        <span class="">
-                            {{ comment.created_on }}
-                        </span> wrote:
-                    </p>
-                    <div id="comment{{ comment.id }}">
-                        {{ comment.body | linebreaks }}
-                    </div>
-                </div>
-                <!-- Edit and delete comment -->
-                {% if not comment.approved and comment.author == user %}
-                    <p>
-                        This comment is awaiting approval
-                    </p>
-                {% endif %}
-                {% if user.is_authenticated and comment.author == user %}
-                    <button class="" data-comment_id="{{ comment.id }}">Delete</button>
-                    <button class="" data-comment_id="{{ comment.id }}">Edit</button>
-                {% endif %}
-            {% endfor %}
-        </div>
-    <!--Create comment-->
-    <div class="">
-        {% if user.is_authenticated %}
-        <h3>Leave a comment:</h3>
-        <form id="commentForm" method="post">
-          {{ comment_form|crispy }}
-          {% csrf_token %}
-          <button type="submit" class="">Submit</button>
-        </form>
-        {% else %}
-        <p>Log in to leave a comment</p>
-        {% endif %}
-      </div>
-      <!-- Delete confirmation modal needs to be added here but unsure of how to in Tailwind-->
-</div>
-<a href=""
-    class="text-blue-500 hover:text-blue-700 transition duration-300 ease-in-out">Back
-    to Events List</a>
 </div>
 
 

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<section class="grid grid-cols-1 gap-4 mx-auto max-w-5xl">
+    <h2 class="text-2xl mt-4 text-center font-bold">Terms of Service</h2>
+    <!-- Light Mode Icon-->
+    <div class="logo-lightmode mx-auto h-8 w-8">
+        <img class="object-contain" src="{% static 'elements/icons/lovesched-logo-icon-lightmode.svg' %}" aria="false">
+    </div>
+    <!-- Dark Mode Icon-->
+    <div class="logo-darkmode mx-auto h-8 w-8">
+        <img class="object-contain" src="{% static 'elements/icons/lovesched-logo-icon-darkmode.svg' %}" aria="false">
+    </div>
+    <div class="divider"></div>
+    <p class="font-bold">Welcome to Love Sched! These Terms of Service govern your access to and use of our website, including any content, functionality, and services offered on or through Love Sched. By accessing or using the Services, you agree to be bound by these Terms of Service</p>
+    <div class="divider"></div>
+    <h3 class="font-bold">1. Acceptance of Terms</h3>
+    <p >By accessing or using the Services, you agree to these Terms of Service and our Privacy Policy. If you do not agree with any part of these terms, you must not access or use the Services.</p>
+    <h3 class="font-bold">2. Eligibility</h3>
+    <p >You must be at least 16 years old to use our Services. By accessing or using the Services, you represent and warrant that you are at least 16 years old.</p>
+    <h3 class="font-bold">3. User Accounts</h3>
+    <p>3a. In order to access certain features of the Services, you may be required to create an account.</p>
+    <p >3b. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorised use of your account or any other breach of security.</p>
+    <h3 class="font-bold">4. Data collection & privacy</h3>
+    <p>4a. We take your privacy seriously. Any data collected through your use of our services will be securely stored in accordance with applicable laws and regulations. We will not share your personal information with third parties without your explicit consent, except as required by law or to fulfil our obligations to you. Your data will be used solely for the purpose of providing and improving our services, and we are committed to maintaining the confidentiality and security of your information.</p>
+    <p>4b. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. All account activities under your responsibility must adhere to our Terms of Conduct. </p>
+    <p >4c. You agree to notify us immediately of any unauthorised use of your account or any other breach of security.</p>
+    <h3 class="font-bold">5. Terms of Conduct</h3>
+    <p>5a. You agree to use the Services only for lawful purposes and in accordance with these Terms of Service.</p>
+    <p>5b. You agree not to use the Services in any way that could damage, disable, overburden, or impair the Services or interfere with any other party's use of the Services.</p>
+    <p >5c. You agree not to engage in any conduct that is abusive, harassing, threatening, defamatory, obscene, or otherwise objectionable.</p>
+    <h3 class="font-bold">6. Content</h3>
+    <p>6a. You retain ownership of any content you submit to the Services, including but not limited to profile information, messages, and photos.</p>
+    <p >6b. By submitting content to the Services, you grant us a non-exclusive, worldwide, royalty-free, perpetual, irrevocable, and fully sublicensable licence to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, and display such content in any form, media, or technology.</p>
+    <h3 class="font-bold">7. Termination</h3>
+    <p >We reserve the right to terminate or suspend your access to the Services at any time, with or without cause, and without prior notice or liability.</p>
+    <h3 class="font-bold">8. Limitation of Liability</h3>
+    <p >In no event shall Love Sched or its affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to lost profits, arising out of or in connection with your use of the Services.</p>
+    <h3 class="font-bold">9. Governing Law</h3>
+    <p >These Terms of Service shall be governed by and construed in accordance with the laws of your regional authorities without regard to its conflict of law principles.</p>
+    <h3 class="font-bold">10. Changes to Terms</h3>
+    <p >We reserve the right to modify or update these Terms of Service at any time. Your continued use of the Services after any such changes constitutes your acceptance of the new Terms of Service.</p>
+    <p class=" text-center font-bold">Please contact us if you have any questions about these Terms of Service</p>
+    <a href="{% url 'contact_us' %}" class="btn btn-primary mb-4 mx-auto font-bold w-32 flex justify-center items-center">Contact us</a>
+</section>
+
+
+{% endblock %}

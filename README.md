@@ -56,7 +56,6 @@ Brought to you by the [**Code Hearted Crew**](#code-hearted-crew)
   - I want to easily recommend Love Sched to friends, highlighting its effectiveness in enhancing romantic relationships through thoughtful and well-planned events.
 
 #### As a differently-abled user
-
   - I want the product to be accessible, with features and designs that accommodate a wide range of disabilities, ensuring everyone can plan and enjoy romantic events.
 
 ### Site Objectives
@@ -90,9 +89,6 @@ Brought to you by the [**Code Hearted Crew**](#code-hearted-crew)
 #### Terms of Service:
     - Our Terms of Service outline simple rules and guidelines to ensure a smooth experience, covering user conduct and privacy.
 
-
-
-
 ### Research
 The following sites were discussed as inspiration.
 - [Design Calendar](https://www.designcalendar.io/events)
@@ -103,7 +99,9 @@ The following sites were discussed as inspiration.
 [**Back to top**](#love-sched)
 
 ### Wireframes
+
 - <img src="docs/images/wf-landing-page.png" width="700" alt="image of wireframe">
+
 - ...
 - ...
 
@@ -166,6 +164,7 @@ _Footer_
 - Please see full documentation for testing and bug reports [here](testing.md)
 
 ## Deployment
+
 - #### Deployment Heroku
 
     This project was deployed using Heroku:

@@ -44,6 +44,20 @@ ALLOWED_HOSTS = ['127.0.0.1',
                  '8000-kpetrauskas-team5febhac-uqzolrupuyi.ws-eu108.gitpod.io',
                  '8000-kpetrauskas-team5febhac-tcpdrjy1di1.ws-eu108.gitpod.io']
 
+
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://lovesched-team5-0bc1fe06d0da.herokuapp.com',
+#     'https://8000-kpetrauskas-team5febhac-9v904ka51ar.ws-eu108.gitpod.io',
+#     'https://8000-kpetrauskas-team5febhac-uqzolrupuyi.ws-eu108.gitpod.io',
+#     'https://8000-kpetrauskas-team5febhac-tcpdrjy1di1.ws-eu108.gitpod.io'
+# ]
+
+
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -127,17 +141,17 @@ EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+# if 'DATABASE_URL' in os.environ:
+#     DATABASES = {
+#         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+#     }
+# else:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
+}
 
 
 AUTHENTICATION_BACKENDS = [
