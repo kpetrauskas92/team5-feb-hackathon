@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="navbar bg-base-300">
+<div class="navbar bg-base-100 shadow-xl">
 
 	{% comment %} {% if messages %}
     <div class="message-container">
@@ -37,11 +37,11 @@
 			</div>
 			<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
 				{% if user.is_authenticated %}
-					<li><a href="{% url 'profile' %}">Profile</a></li>
-					<li><a href="{% url 'account_logout' %}">Logout</a></li>
+					<li><a href="{% url 'profile' %}" class="btn btn-ghost">Profile</a></li>
+					<li><a href="{% url 'account_logout' %}" class="btn btn-ghost">Logout</a></li>
 				{% else %}
-					<li><a href="{% url 'account_login' %}">Login</a></li>
-					<li><a href="{% url 'account_signup' %}">Register</a></li>
+					<li><a href="{% url 'account_login' %}" class="btn btn-ghost">Login</a></li>
+					<li><a href="{% url 'account_signup' %}" class="btn btn-ghost">Register</a></li>
 				{% endif %}
 			</ul>
 		</div>
@@ -53,10 +53,10 @@
 				</svg>
 			</div>
 			<ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-				<li><a href="{% url 'event_list' %}">Valentine Ideas</a></li>
-				<li><a>FAQ's</a></li>
-				<li><a href="{% url 'about' %}">About CHC</a></li>
-				<li><a>Contact us</a></li>
+				<li><a href="{% url 'event_list' %}" class="btn btn-ghost">Valentine Ideas</a></li>
+				<li><a href="{% url 'dev_team' %}" class="btn btn-ghost">About CHC</a></li>
+				<li><a href="{% url 'contact_us' %}" class="btn btn-ghost">Contact us</a></li>
+				<li><a href="{% url 'tos' %}" class="btn btn-ghost">Terms of Service</a></li>
 			</ul>
 		</div>
 

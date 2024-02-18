@@ -7,7 +7,12 @@ html {
 }
 
 body {
+    font-family: 'Raleway', sans-serif;
     margin: 0;
+}
+
+h1, h2, h3, p, a {
+    font-family: 'Raleway', sans-serif;
 }
 
 /* Calendar Styles */
