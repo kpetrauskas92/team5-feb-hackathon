@@ -5,6 +5,14 @@ def index(request):
     return render(request, 'index.html')
 
 
-
 def about(request):
-    return render(request, 'about.html')
+    return render(request, 'dev_team.html')
+
+
+def tos(request):
+    return render(request, 'tos.html')
+
+
+def contact_us(request):
+    return render(request, 'contact_us.html')
+
