@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from event.models import EventPost
 from event.forms import EventPostForm
+from .forms import UserProfileForm
+from .models import UserProfile
 
 
 @login_required
@@ -31,3 +33,23 @@ def create_event_post_from_profile(request):
     else:
         form = EventPostForm(initial={'status': 0})
     return render(request, 'event/create_event_post.html', {'form': form})
+
+
+@login_required
+def update_profile(request):
+    """ Display the profile from. """
+    profile = get_object_or_404(UserProfile, user=request.user)
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+    else:
+        form = UserProfileForm(instance=profile)
+
+    template = 'profiles/update_profile.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
