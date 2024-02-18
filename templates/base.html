@@ -31,6 +31,7 @@
     {% endblock %}
 
     {% block extra_js %}
+    <script src="{% static 'js/calendar.js' %}"></script>
     {% endblock %}
 
     <title></title>
@@ -50,6 +51,7 @@
     </main>
 
     {% block postloadjs %}
+    <script src=" https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js "></script>
     <script src="{% static 'js/toasts.js' %}" defer></script>
     {% endblock %}
 

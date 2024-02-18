@@ -45,12 +45,12 @@ ALLOWED_HOSTS = ['127.0.0.1',
                  '8000-kpetrauskas-team5febhac-tcpdrjy1di1.ws-eu108.gitpod.io']
 
 
-CSRF_TRUSTED_ORIGINS = [
-    'lovesched-team5-0bc1fe06d0da.herokuapp.com',
-    '8000-kpetrauskas-team5febhac-9v904ka51ar.ws-eu108.gitpod.io',
-    '8000-kpetrauskas-team5febhac-uqzolrupuyi.ws-eu108.gitpod.io',
-    '8000-kpetrauskas-team5febhac-tcpdrjy1di1.ws-eu108.gitpod.io'
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'lovesched-team5-0bc1fe06d0da.herokuapp.com',
+#     '8000-kpetrauskas-team5febhac-9v904ka51ar.ws-eu108.gitpod.io',
+#     '8000-kpetrauskas-team5febhac-uqzolrupuyi.ws-eu108.gitpod.io',
+#     '8000-kpetrauskas-team5febhac-tcpdrjy1di1.ws-eu108.gitpod.io'
+# ]
 
 CSRF_COOKIE_SECURE = True
 

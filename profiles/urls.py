@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
+from .views import profile, create_event_post_from_profile
 
 urlpatterns = [
-    path('', views.profile, name='profile'),
+    path('', profile, name='profile'),  # Assuming this is the main profile page
+    path('create/', create_event_post_from_profile, name='create_event_post_from_profile'),  # URL for creating a draft post
 ]
