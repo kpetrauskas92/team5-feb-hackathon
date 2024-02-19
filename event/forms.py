@@ -30,8 +30,8 @@ class EventPostForm(forms.ModelForm):
         model = EventPost
         fields = ['event_name', 'status', 'description', 'category',
                   'location', 'image']
-         # Custom widget settings for fields to enhance UI. For example,
-         # increasing the size of the 'description' textarea.
+        # Custom widget settings for fields to enhance UI. For example,
+        # increasing the size of the 'description' textarea.
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
             'image': CustomClearableFileInput()

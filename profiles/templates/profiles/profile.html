@@ -31,7 +31,7 @@
         {% for user_date in user_dates %}
         <div class="flex justify-between border items-center p-2 rounded-md mt-2">
             <div>
-                <p class="text-brown badge">{{ user_date.title }}</p>
+                <p class=" badge">{{ user_date.title }}</p>
                 <p class="text-brown font-semibold text-sm ml-2">{{ user_date.date }}</p>
                 <p class="text-brown text-sm ml-2">Cost: €{{ user_date.budget|default_if_none:"0" }}</p>
             </div>
