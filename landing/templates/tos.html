@@ -1,11 +1,11 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %}  <!-- Base layout inheritance -->
+{% load static %}  <!-- Static files access -->
 
 {% block head_title %}- Terms of Service{% endblock %}
 
-{% block content %}
+{% block content %} <!-- Main content block -->
 
-
+<!-- Section for Terms of Service -->
 <section class="grid grid-cols-1 gap-4 mx-auto px-4 max-w-5xl">
     <h2 class="text-2xl mt-4 text-center text-primary font-bold">Terms of Service</h2>
     <!-- Light Mode Icon-->
@@ -41,9 +41,10 @@
     <p >These Terms of Service shall be governed by and construed in accordance with the laws of your regional authorities without regard to its conflict of law principles.</p>
     <h3 class="text-primary font-bold">10. Changes to Terms</h3>
     <p >We reserve the right to modify or update these Terms of Service at any time. Your continued use of the Services after any such changes constitutes your acceptance of the new Terms of Service.</p>
+    <!-- Contact Us Section -->
     <p class="text-primary text-center font-bold">Please contact us if you have any questions about these Terms of Service</p>
     <a href="{% url 'contact_us' %}" class="btn btn-secondary mb-4 mx-auto font-bold w-32 flex justify-center items-center hover:bg-primary hover:text-secondary">Contact us</a>
 </section>
 
 
-{% endblock %}
+{% endblock %} <!-- End of main content block -->
