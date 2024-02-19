@@ -36,30 +36,6 @@ h1, h2, h3, p, a {
     font-family: 'Raleway', sans-serif;
 }
 
-.footer-image {
-    position: relative;
-    width: 100%; /* Adjust as necessary */
-    height: 200px; /* Adjust as necessary */
-}
-
-.background-opacity {
-    background: #ffffff;
-    opacity: 0.6;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
-
-.image-container {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
 
 /* Calendar Styles */
 

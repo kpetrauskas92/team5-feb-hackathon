@@ -17,7 +17,7 @@ class EventPostList(generic.ListView):
     limit the number of posts per page.
     """
     template_name = "event/eventlist.html"
-    paginate_by = 4
+    paginate_by = 6
 
     def get_queryset(self):
         # Retrieves the category from the URL query parameters.
@@ -45,6 +45,7 @@ class EventPostList(generic.ListView):
         context['category_choices'] = CATEGORY
         return context
 
+
 # Function views below handle specific actions like viewing details, liking a
 # post, and CRUD operations for EventPosts.
 def event_details(request, slug):
@@ -57,10 +58,9 @@ def event_details(request, slug):
         eventpost = get_object_or_404(EventPost, slug=slug)
 
         if eventpost.status == 0 and (eventpost.author != request.user and
-        not request.user.is_staff):
+                                      not request.user.is_staff):
             raise Http404(
-                "This idea is private and you do not have permission "
-                "to view it.")
+                "This idea is private and you do not have permission to view it.")
     else:
         # For unauthenticated users, only fetch public (published) event posts
         eventpost = get_object_or_404(EventPost, slug=slug, status=1)
@@ -95,7 +95,7 @@ def like_event_post(request, slug):
     user = request.user
     # Try to get or create a Like object for the user and event post.
     liked, created = Like.objects.get_or_create(user=user,
-    event_post=event_post)
+                                                event_post=event_post)
 
     if not created:
         # If the Like object already existed, the user is "unliking" the post.
@@ -121,11 +121,12 @@ def like_event_post(request, slug):
     if 'HX-Request' in request.headers:
         # Render only the like button part of the template for HTMX requests.
         html = render_to_string('likes/like_button.html', context=context,
-        request=request)
+                                request=request)
         return HttpResponse(html)
 
     # For non-HTMX requests, redirect to the event detail page.
     return redirect('event', slug=slug)
+
 
 @login_required
 def create_event_post(request):
@@ -147,19 +148,20 @@ def create_event_post(request):
             # Now save the EventPost to the database.
             event_post.save()
             messages.success(request, 'Your idea has been created '
-            'successfully!')
+                                      'successfully!')
             # Redirect to the detail view of the newly created post.
             return redirect('event', slug=event_post.slug)
         else:
             # If the form is invalid, display an error message.
             messages.error(request, 'There was an error with your submission. '
-            'Please check the form for errors.')
+                                    'Please check the form for errors.')
     else:
         # If the request is a GET, instantiate a blank form.
         form = EventPostForm(initial={'status': 0})
 
     # Render the form template.
     return render(request, 'event/create_event_post.html', {'form': form})
+
 
 @login_required
 def update_event(request, slug):
@@ -184,12 +186,12 @@ def update_event(request, slug):
             # Save the updated EventPost.
             form.save()
             messages.success(request, 'Your idea has been updated '
-            'successfully!')
+                                      'successfully!')
             return redirect('event', slug=eventpost.slug)
         else:
             # If the form is invalid, display an error message.
             messages.error(request, 'There was an error updating your idea. '
-            'Please check the form for errors.')
+                                    'Please check the form for errors.')
     else:
         # For a GET request, instantiate the form with the EventPost instance
         # to be updated.
@@ -198,6 +200,7 @@ def update_event(request, slug):
     # Render the update form template.
     return render(request, 'event/edit_event_post.html', {
         'form': form, 'eventpost': eventpost})
+
 
 @login_required
 def delete_event(request, slug):
