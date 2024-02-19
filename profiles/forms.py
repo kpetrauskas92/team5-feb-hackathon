@@ -2,11 +2,20 @@ from django import forms
 from .models import UserProfile, UserDate
 
 
+
+class CustomClearableFileInput(forms.ClearableFileInput):
+    template_name = 'custom_widgets/custom_clearable_file_input.html'
+
+
 class UserProfileForm(forms.ModelForm):
     field_order = ['first_name', 'last_name', 'sex']
 
     class Meta:
         model = UserProfile
+        fields = ['first_name', 'last_name', 'sex', 'image']
+        widgets = {
+            'image': CustomClearableFileInput(),
+        }
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
@@ -18,7 +27,9 @@ class UserProfileForm(forms.ModelForm):
         placeholders = {
             'first_name': 'First Name',
             'last_name': 'Last Name',
-            'sex': 'Sex',
+            'sex': 'Sex'
+            'image',
+
         }
 
         self.fields['first_name'].widget.attrs['autofocus'] = True
@@ -52,3 +63,15 @@ class UserDateForm(forms.ModelForm):
             'budget': forms.NumberInput(
                 attrs={'class': 'form-input px-4 py-3 rounded-full'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        """
+        Add placeholders and classes, remove auto-generated
+        labels and set autofocus on first field
+        """
+        super().__init__(*args, **kwargs)
+
+        custom_classes = 'border-black rounded-0 profile-form-input'
+
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = custom_classes
