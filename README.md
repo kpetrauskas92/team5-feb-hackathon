@@ -166,6 +166,15 @@ _Login/Register_
 _Footer_
 </details>
 
+### Error Pages
+- Custom 403, 404 and 500 error pages included which contain a button to take the user back to the homepage.
+<details><summary>404</summary>
+<img src="docs/images/404.png">
+</details>
+<details><summary>500</summary>
+<img src="docs/images/500.png">
+</details>
+
 ## Future Features
 - Comments are planned as a future feature to enhance the cleanliness and organization of the ideas page, pending the implementation of a comment approval process.
 - ...
