@@ -1,5 +1,5 @@
 {% extends 'base.html' %}  <!-- Extends base layout -->
-{% load crispy_forms_tags %}  <!-- Loads crispy forms tags for styling -->
+{% load tailwind_filters %}  <!-- Loads crispy forms tags for styling -->
 {% load static %}  <!-- Loads static files -->
 
 {% block head_title %}- Contact Us{% endblock %}
@@ -12,24 +12,22 @@
             Let's Make Magic Together
         </h2>
         <!-- Description paragraph -->
-        <p class="text-primary">Our platform is more than just a website; it's
-            a beacon for romance, a place where every user has the opportunity
-            to make a real difference in someone else's romantic life. Our
-            website is more than just a platform; it's a place where passion
-            meets purpose, and where every user has the chance to make a real
-            difference in someone elses romantic life. Every suggestion, piece
-            of feedback, and improvement you propose helps us make LoveSched an
-            extraordinary website. Join us in shaping a platform that could
-            spark countless love stories by enhancing its functionality.</p>
+        <p class="text-primary text-center px-10">Our platform, LoveSched, is not just a website but a catalyst for romance. It's a space where passion meets purpose, allowing every user to significantly impact others' romantic journeys. Your suggestions and feedback play a crucial role in transforming LoveSched into a site that could ignite numerous love stories. Help us enhance its functionality and shape a platform dedicated to fostering love.</p>
         <!-- Contact form  -->
-        <form method="post">
-            {{ contact_form | crispy }}  <!-- Renders the contact form -->
-            {% csrf_token %}  <!-- CSRF token for security -->
-            <button type="submit"
-                class="px-4 py-2 bg-secondary text-white font-bold rounded hover:bg-primary hover:text-secondary">
-                Submit
-            </button>
-        </form>
+
+        <div class="container flex flex-col items-center justify-center px-4 mx-auto mt-10">
+            <!-- Main container for the content, centered with Tailwind CSS -->
+            <div class="card shrink-0 w-full max-w-xl shadow-2xl bg-base-100 dark:bg-slate-50">
+                <form class="card-body" method="post">
+                    {{ contact_form | crispy }}  <!-- Renders the contact form -->
+                    {% csrf_token %}  <!-- CSRF token for security -->
+                    <button type="submit"
+                        class="px-4 py-2 bg-secondary text-white font-bold rounded hover:bg-primary hover:text-secondary">
+                        Submit
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
