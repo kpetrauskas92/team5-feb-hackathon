@@ -3,8 +3,7 @@ from .models import UserProfile, UserDate
 
 
 class UserProfileForm(forms.ModelForm):
-
-    field_order = ['first_name', 'last_name', 'phone_number']
+    field_order = ['first_name', 'last_name', 'sex']
 
     class Meta:
         model = UserProfile
@@ -13,21 +12,25 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         """
         Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
+        labels and set autofocus on first field. Adjusted for the 'sex' field.
         """
         super().__init__(*args, **kwargs)
         placeholders = {
             'first_name': 'First Name',
             'last_name': 'Last Name',
-            'phone_number': 'Phone Number',
+            'sex': 'Sex',
         }
 
         self.fields['first_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
-            if field != 'image':
-                placeholder = placeholders[field]
-                self.fields[field].widget.attrs['placeholder'] = placeholder
-                self.fields[field].label = False
+            if field in placeholders:
+                placeholder = placeholders.get(field, '')
+                if field != 'image' and field != 'sex':
+                    self.fields[field].widget.attrs['placeholder'] = placeholder
+                    self.fields[field].label = False
+                elif field == 'sex':
+                    self.fields[field].widget.attrs['placeholder'] = placeholder
+                    self.fields[field].empty_label = "Select Sex"
 
 
 class UserDateForm(forms.ModelForm):
