@@ -15,6 +15,7 @@ Brought to you by the [**Code Hearted Crew**](#code-hearted-crew)
     * [***Site Objectives***](#site-objectives)
     * [***Research***](#research)
     * [***Wireframes***](#wireframes)
+    * [***Database Schema***](#database-schema)
     * [***Colour Scheme***](#colour-scheme)
     * [***Typography***](#typography)
 * [**Features**](#features)
@@ -106,6 +107,12 @@ The following sites were discussed as inspiration.
 - <img src="docs/images/wf-landing-page.png" width="700" alt="image of wireframe">
 - ...
 - ...
+
+### Database Schema
+Pre-project planning involved generating an entity relationship diagram. This was done in order to create a clear plan as to how all of the database models interact with each other. This was also done to determine what data fields were needed for each model. The relationship between each model and another is noted in the diagram with "FK" denoting Foreign Key. A One To One relationship exists between the User model and the UserProfile model.
+<details><summary>Entity Relationship Diagram</summary>
+<img src="docs/images/erd.png" width="700" alt="image of erd">
+</details>
 
 ### 🖌️Colour Scheme
 ![An image of the project colour scheme](/docs/images/colour-scheme.png)
