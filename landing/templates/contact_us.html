@@ -1,31 +1,35 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
-{% load static %}
+{% extends 'base.html' %}  <!-- Extends base layout -->
+{% load crispy_forms_tags %}  <!-- Loads crispy forms tags for styling -->
+{% load static %}  <!-- Loads static files -->
 
 {% block head_title %}- Contact Us{% endblock %}
 
 {% block content %}
 <div class="flex justify-center">
     <div class="w-full md:w-1/2 my-20">
-        <h2 class="text-2xl text-primary my-3 font-semibold leadi text-center">Let's Make Magic
-            Together</h2>
-        <p class="text-primary">Our platform is more than just a website; it's a beacon for romance,
-            a place where every user has the opportunity to make a real
-            difference in someone else's romantic life. Our website is more
-            than just a platform; it's a place where passion
+        <!-- Heading for the contact page -->
+        <h2 class="text-2xl text-primary my-3 font-semibold leadi text-center">
+            Let's Make Magic Together
+        </h2>
+        <!-- Description paragraph -->
+        <p class="text-primary">Our platform is more than just a website; it's
+            a beacon for romance, a place where every user has the opportunity
+            to make a real difference in someone else's romantic life. Our
+            website is more than just a platform; it's a place where passion
             meets purpose, and where every user has the chance to make a real
             difference in someone elses romantic life. Every suggestion, piece
             of feedback, and improvement you propose helps us make LoveSched an
             extraordinary website. Join us in shaping a platform that could
             spark countless love stories by enhancing its functionality.</p>
-        <!-- Contact form -->
+        <!-- Contact form  -->
         <form method="post">
-            {{ contact_form | crispy }}
-            {% csrf_token %}
+            {{ contact_form | crispy }}  <!-- Renders the contact form -->
+            {% csrf_token %}  <!-- CSRF token for security -->
             <button type="submit"
-                class="px-4 py-2 bg-secondary text-white font-bold rounded hover:bg-primary hover:text-secondary">Submit</button>
+                class="px-4 py-2 bg-secondary text-white font-bold rounded hover:bg-primary hover:text-secondary">
+                Submit
+            </button>
         </form>
     </div>
 </div>
-
 {% endblock %}

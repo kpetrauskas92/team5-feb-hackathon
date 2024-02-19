@@ -20,4 +20,8 @@ class ContactUs(models.Model):
     read = models.BooleanField(default=False)
 
     def __str__(self):
+        """
+        Returns a string representation of the instance, indicating it's a
+        message from a specific name.
+        """
         return f"Message from {self.name}"
