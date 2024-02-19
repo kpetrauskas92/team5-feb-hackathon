@@ -17,7 +17,7 @@
 
     <form method="post" action="{% url 'delete_user_date' user_date.id %}">
         {% csrf_token %}
-        <button class="btn text-white btn-secondary w-full mt-2" type="submit">Yes, delete it</button>
+        <button class="btn btn-error w-full mt-2" type="submit">Yes, delete it</button>
     </form>
 
 </section>
