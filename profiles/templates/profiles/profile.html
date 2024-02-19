@@ -12,12 +12,12 @@
             <img class="mask mask-heart" src="{% if 'placeholder' in user.image.url %}{% static 'elements/placeholders/profile_placeholder.webp' %}{% else %}{{ user.profile.image.url }}{% endif %}" alt="{{ post.event_name }}">
         </div>
         
-        <h2 class="text-lg font-semibold text-center">Hi {{ request.user.profile.first_name|default:request.user.username }}!</h2>
+        <h2 class="text-lg font-semibold text-brown text-center">Hi {{ request.user.profile.first_name|default:request.user.username }}!</h2>
         
         <!-- Edit Profile Button -->
         <div class="mt-4 text-center">
             <a href="{% url 'update_profile' %}"
-                class="btn btn-primary w-full"
+                class="btn btn-secondary w-full"
                 hx-get="{% url 'update_profile' %}"
 				hx-target="#my_modal_3 .modal-box"
 				onclick="my_modal_3.showModal()">
@@ -25,19 +25,19 @@
             </a>
         </div>
 
-        <div class="divider divider-primary">
+        <div class="divider text-brown divider-info">
             Upcoming Dates:
         </div>
         
         {% for user_date in user_dates %}
         <div class="flex justify-between border items-center p-2 rounded-md mt-2">
             <div>
-                <p class="badge">{{ user_date.title }}</p>
-                <p class="font-semibold text-sm ml-2">{{ user_date.date }}</p>
-                <p class="text-sm ml-2">Cost: €{{ user_date.budget|default_if_none:"0" }}</p>
+                <p class="text-brown badge">{{ user_date.title }}</p>
+                <p class="text-brown font-semibold text-sm ml-2">{{ user_date.date }}</p>
+                <p class="text-brown text-sm ml-2">Cost: €{{ user_date.budget|default_if_none:"0" }}</p>
             </div>
             <a href="{% url 'delete_user_date' user_date.id %}"
-                class="btn btn-ghost btn-circle"
+                class="btn btn-ghost btn-secondary btn-circle"
                 hx-get="{% url 'delete_user_date' user_date.id %}"
 				hx-target="#my_modal_3 .modal-box"
 				onclick="my_modal_3.showModal()">
@@ -47,7 +47,7 @@
             </a>
         </div>
         {% empty %}
-        <p>No upcoming dates.</p>
+        <p class="text-brown">No upcoming dates.</p>
         {% endfor %}
 
         {% if user_dates.exists and total_budget > 0 %}
@@ -64,7 +64,7 @@
         <div class="collapse collapse-arrow border border-base-300 mb-2 rounded-md">
             <input type="checkbox" /> 
             <div class="collapse-title font-semibold text-xl">
-                <div class="flex justify-start">
+                <div class="flex justify-start text-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                     </svg>
@@ -77,20 +77,20 @@
         </div>
         <!-- Toggle Buttons -->
         <div class="flex justify-between pt-3">
-            <a href="{% url 'event_list' %}" id="suggestedPostsTab" class="btn btn-sm btn-outline">
+            <a href="{% url 'event_list' %}" id="suggestedPostsTab" class="btn text-primary btn-sm btn-outline">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
                 Find Ideas
             </a>
-            <a href="{% url 'create_event_post_from_profile' %}" class="btn btn-sm btn-outline"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <a href="{% url 'create_event_post_from_profile' %}" class="btn text-primary btn-sm btn-outline"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>
               Add idea
               </a>
         </div>
     
-        <div class="divider divider-primary">My Ideas</div>
+        <div class="divider text-primary divider-primary">My Ideas</div>
         <div id="myPosts" class="grid grid-cols-1 gap-4">
             {% for post in user_posts %}
             <div class="mb-4 px-4 pt-4 bg-white shadow rounded h-full flex flex-col">
@@ -103,7 +103,7 @@
 
                 <div class="flex justify-between items-center pt-4">
                     <div class="flex justify-start items-center">
-                        <h4 class="font-bold text-xl mr-2">{{ post.event_name }}</h4>
+                        <h4 class="font-bold text-brown text-xl mr-2">{{ post.event_name }}</h4>
                         {% if post.status == 1 %}
                         <span class="text-red-600 font-semibold badge badge-outline">Public</span>
                         {% else %}
@@ -111,13 +111,13 @@
                         {% endif %}
                     </div>
 
-                    <div class="">
+                    <div class="text-brown">
                         <!-- Check if the current user is the author of the post -->
                         {% if post.author == request.user %}
-                        <div class="">
+                        <div class="text-brown">
                             <!-- Edit Button -->
                             <a href="{% url 'update_event' slug=post.slug %}"
-                                class="btn btn-sm btn-ghost btn-circle">
+                                class="btn btn-sm btn-ghost btn-circle text-brown">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                                 </svg>
@@ -125,7 +125,7 @@
                             
                             <!-- Delete Button -->
                             <a href="{% url 'delete_event' slug=post.slug %}"
-                                class="btn btn-sm btn-ghost btn-circle"
+                                class="btn btn-sm btn-ghost btn-circle text-brown"
                                 hx-get="{% url 'delete_event' slug=post.slug %}"
                                 hx-target="#my_modal_3 .modal-box"
                                 onclick="my_modal_3.showModal()">
@@ -138,21 +138,21 @@
                     </div>
                 </div>
 
-                <div class="divider divider-primary">
+                <div class="divider divider-info">
                     <img src="{% static 'elements/icons/lovesched-logo-icon-lightmode.svg' %}"
                         class="w-6" alt="Logo">
                 </div>
 
-                <p>{{ post.description|truncatechars:100 }}</p>
+                <p class="text-brown">{{ post.description|truncatechars:100 }}</p>
 
                 <a href="{% url 'add_user_date' %}?post_id={{ post.id }}"
-                    class="add-to-calendar-btn btn btn-primary mt-2"
+                    class="add-to-calendar-btn btn btn-secondary mt-2"
                     hx-get="{% url 'add_user_date' %}?post_id={{ post.id }}"
 					hx-target="#my_modal_3 .modal-box"
 					onclick="my_modal_3.showModal()"
                     data-post-id="{{ post.id }}"
                     data-event-name="{{ post.event_name }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="none" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     Add to Calendar
