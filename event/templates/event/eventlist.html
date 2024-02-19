@@ -1,58 +1,66 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} <!-- Inherit from base layout -->
+{% load tailwind_filters %} <!-- Load custom filters for Tailwind CSS utility classes -->
+{% load static %} <!-- Load the static tag to access static files -->
 
 {% block head_title %}Event List{% endblock %}
 
 {% block content %}
+<!-- Main content area where event listings and functionality are displayed -->
 
 <div class="container mx-auto max-w-5xl">
+    <!-- Container for centered content with a maximum width -->
 
-    <!-- Add New Event Button FOR TESTING -->
+    <!-- Section for the button to add new events, intended for testing or admin use -->
     <div class="my-4 flex justify-center px-4">
-        <a href="{% url 'create_event_post' %}"
-            class="btn btn-primary btn-wide">
+        <a href="{% url 'create_event_post' %}" class="btn btn-primary btn-wide">
+            <!-- SVG icon for adding a new event -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                class="w-6 h-6">
+                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                 class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M12 4.5v15m7.5-7.5h-15" />
+                      d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
-
-            Create Your Idea
+            Create Your Idea <!-- Button text -->
         </a>
     </div>
-    <div class="divider divider-primary">Filter By Category
 
-    </div>
+    <!-- Divider indicating the start of the filter section -->
+    <div class="divider divider-primary">Filter By Category</div>
     <div>
+        <!-- Form for filtering events by category -->
         <form method="GET" action="" class="mb-4 flex justify-center px-4">
             <select name="category" class="select select-sm select-primary w-full max-w-xs" onchange="this.form.submit()">
+                <!-- Options for filtering -->
                 <option value="">All Categories</option>
                 <option value="most_liked" {% if request.GET.category == 'most_liked' %}selected{% endif %}>Most Liked</option>
+                <!-- Dynamically generated category options -->
                 {% for key, name in category_choices %}
                 <option value="{{ key }}" {% if request.GET.category == key %}selected{% endif %}>{{ name }}</option>
                 {% endfor %}
             </select>
         </form>
     </div>
-    
-    <!-- Event Entries Column -->
+
+    <!-- Section displaying event entries -->
     <div class="mt-3 flex flex-wrap">
         {% if eventpost_list %}
+            <!-- Iterates over each event post for display -->
             {% for eventpost in eventpost_list %}
             <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-4">
                 <div class="bg-white rounded-lg overflow-hidden shadow-lg">
                     <div class="p-4">
+                        <!-- Event image and title -->
                         <div class="mb-4">
                             <a href="{% url 'event' eventpost.slug %}">
+                                <!-- Conditional display for placeholder or actual event image -->
                                 {% if "placeholder" in eventpost.image.url %}
                                 <img class="w-full h-auto"
-                                    src="{% static 'elements/placeholders/post_placeholder.webp' %}"
-                                    alt="placeholder image">
+                                     src="{% static 'elements/placeholders/post_placeholder.webp' %}"
+                                     alt="placeholder image">
                                 {% else %}
                                 <img class="w-full h-auto"
-                                    src="{{ eventpost.image.url }}"
-                                    alt="{{ eventpost.event_name }}">
+                                     src="{{ eventpost.image.url }}"
+                                     alt="{{ eventpost.event_name }}">
                                 {% endif %}
                             </a>
                         </div>
@@ -60,40 +68,45 @@
                             {{ eventpost.event_name }}
                         </h2>
 
+                        <!-- Divider with logo -->
                         <div class="divider divider-primary">
                             <img src="{% static 'elements/icons/lovesched-logo-icon-lightmode.svg' %}"
-                                class="w-6" alt="Logo">
+                                 class="w-6" alt="Logo">
                         </div>
 
+                        <!-- Short description of the event -->
                         <p class="dark:text-gray-800 mb-4">
                             {{ eventpost.description|truncatechars:100 }}
                         </p>
-                        <!-- Add a view button at the bottom -->
+                        <!-- Button to view the full event details -->
                         <div class="text-center">
                             <a href="{% url 'event' eventpost.slug %}"
-                                class="btn btn-primary w-full">View Idea</a>
+                               class="btn btn-primary w-full">View Idea</a>
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
         {% else %}
+            <!-- Message displayed if no events are available for the selected category -->
             <div class="w-full text-center py-4">
                 <p>No posts for this category.</p>
             </div>
         {% endif %}
     </div>
 
+    <!-- Pagination navigation -->
     {% if is_paginated %}
     <nav aria-label="Page navigation" class="flex justify-center mt-4">
         <ul class="list-reset flex">
+            <!-- Previous page link -->
             {% if page_obj.has_previous %}
             <li>
                 <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}"
-                    class="px-4 py-2 leading-tight text-gray-800 bg-white rounded-l-lg hover:bg-gray-100">«
-                    PREV</a>
+                   class="px-4 py-2 leading-tight text-gray-800 bg-white rounded-l-lg hover:bg-gray-100">« PREV</a>
             </li>
             {% endif %}
+            <!-- Page number links -->
             {% for num in page_obj.paginator.page_range %}
                 {% if page_obj.number == num %}
                     <li><a href="?page={{ num }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}" class="px-4 py-2 leading-tight text-gray-800 bg-white hover:bg-gray-100">{{ num }}</a></li>
@@ -101,13 +114,12 @@
                     <li><a href="?page={{ num }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}" class="px-4 py-2 leading-tight text-gray-800 bg-white hover:bg-gray-100">{{ num }}</a></li>
                 {% endif %}
             {% endfor %}
+            <!-- Next page link -->
             {% if page_obj.has_next %}
             <li><a href="?page={{ page_obj.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}"
-                    class="px-4 py-2 leading-tight text-gray-800 bg-white rounded-r-lg hover:bg-gray-100">
-                    NEXT »</a></li>
+                   class="px-4 py-2 leading-tight text-gray-800 bg-white rounded-r-lg hover:bg-gray-100">NEXT »</a></li>
             {% endif %}
         </ul>
     </nav>
     {% endif %}
-
-{% endblock %}
+{% endblock %} <!-- End of the main content block -->

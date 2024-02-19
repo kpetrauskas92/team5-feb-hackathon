@@ -1,13 +1,13 @@
-{% extends 'base.html' %}
-{% load tailwind_filters %}
-{% load static %}
+{% extends 'base.html' %} <!-- Inherit from base layout -->
+{% load tailwind_filters %} <!-- Load custom filters for Tailwind CSS utility classes -->
+{% load static %} <!-- Load the static tag to access static files -->
 
-{% block content %}
+{% block content %} <!-- Start of the main content block -->
 <div class="container flex flex-col items-center justify-center mx-auto px-4 mt-10">
     <div class="card shrink-0 w-full max-w-xl shadow-2xl bg-base-100 dark:bg-slate-50">
 
         <h1 id="create-valentines-idea" class="text-2xl font-bold text-center text-primary pt-2">Edit your Idea</h1>
-    
+
         <form class="card-body" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form|crispy }}
@@ -16,4 +16,4 @@
         </form>
     </div>
 </div>
-{% endblock %}
+{% endblock %} <!-- End of the main content block -->
