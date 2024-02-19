@@ -28,7 +28,7 @@
 
         <!-- Event title and like button section -->
         <div class="flex justify-between items-center pt-6">
-            <h2 class="text-3xl font-bold text-gray-900">{{ eventpost.event_name }}</h2>
+            <h2 class="text-3xl font-bold text-brown">{{ eventpost.event_name }}</h2>
             <!-- Dynamically included like button from another template for modularity -->
             <div class="mr-2" id="like-button-{{ eventpost.slug }}">
                 {% include 'likes/like_button.html' %}
@@ -36,7 +36,7 @@
         </div>
 
         <!-- Event location display with an accompanying icon -->
-        <p class="text-xl text-gray-600 flex justify-start">
+        <p class="text-xl text-brown flex justify-start">
             <!-- SVG icon for location visualization -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <!-- Path elements for the SVG icon -->
@@ -45,7 +45,7 @@
         </p>
 
         <!-- Decorative divider with logo -->
-        <div class="divider divider-primary">
+        <div class="divider divider-info">
             <img src="{% static 'elements/icons/lovesched-logo-icon-lightmode.svg' %}" class="w-6" alt="Logo">
         </div>
 
@@ -54,8 +54,8 @@
             <div class="flex justify-between">
                 <!-- Displays the date when the event was last updated -->
                 <div class="flex flex-col">
-                    <p class="text-md badge rounded-md text-gray-700 mb-1"><strong>Updated on:</strong></p>
-                    <p class="text-sm badge rounded-md text-gray-600 mb-4">{{ eventpost.updated_on }}</p>
+                    <p class="bg-white text-md badge rounded-md text-brown"><strong>Updated on:</strong></p>
+                    <p class="bg-white text-sm badge rounded-md text-brown mb-4">{{ eventpost.updated_on }}</p>
                 </div>
 
                 <!-- Conditionally rendered action buttons for event owners -->
@@ -78,19 +78,19 @@
             </div>
 
             <!-- Event description -->
-            <p class="text-md bg-base-100 rounded-md p-2 text-gray-600">{{ eventpost.description }}</p>
+            <p class="text-md bg-white rounded-md p-2 text-brown">{{ eventpost.description }}</p>
 
             <!-- Navigation and calendar addition buttons -->
             <div class="flex justify-between items-center mx-auto max-w-2xl mt-4">
                 <!-- Button for navigating back to the event list -->
-                <a href="{% url 'event_list' %}" class="btn btn-primary">
+                <a href="{% url 'event_list' %}" class="btn btn-secondary">
                     <!-- SVG icon for the back action -->
                 </a>
                 <!-- Conditional rendering for the 'Add to Calendar' button based on user authentication -->
                 {% if user.is_authenticated %}
                 <!-- Button for adding the event to the user's calendar, visible only to authenticated users -->
                 <a href="{% url 'add_user_date' %}?post_id={{ eventpost.id }}"
-                    class="add-to-calendar-btn btn btn-primary"
+                    class="add-to-calendar-btn btn btn-secondary"
                     hx-get="{% url 'add_user_date' %}?post_id={{ eventpost.id }}"
                     hx-target="#my_modal_3 .modal-box"
                     onclick="my_modal_3.showModal()">
@@ -98,7 +98,7 @@
                 </a>
                 {% else %}
                     <!-- Prompt for unauthenticated users to log in before adding events to their calendar -->
-                    <a href="{% url 'account_login' %}?next={{ request.path }}" class="btn btn-primary">
+                    <a href="{% url 'account_login' %}?next={{ request.path }}" class="btn btn-secondary">
                         <!-- SVG icon for the login action -->
                     </a>
                 {% endif %}
