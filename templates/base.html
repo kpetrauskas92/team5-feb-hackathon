@@ -47,10 +47,9 @@
     {% endblock %}
 
     {% block extra_js %}
-    <script src="{% static 'js/calendar.js' %}"></script>
     {% endblock %}
 
-    <title>LoveSched</title>
+    <title>LoveSched {% block head_title %}{% endblock %}</title>
   </head>
 
   <body class="flex flex-col min-h-screen" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
