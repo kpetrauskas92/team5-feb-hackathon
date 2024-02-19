@@ -17,7 +17,7 @@
         <!-- Edit Profile Button -->
         <div class="mt-4 text-center">
             <a href="{% url 'update_profile' %}"
-                class="btn btn-secondary w-full"
+                class="btn text-white btn-secondary w-full"
                 hx-get="{% url 'update_profile' %}"
 				hx-target="#my_modal_3 .modal-box"
 				onclick="my_modal_3.showModal()">
@@ -37,7 +37,7 @@
                 <p class="text-brown text-sm ml-2">Cost: €{{ user_date.budget|default_if_none:"0" }}</p>
             </div>
             <a href="{% url 'delete_user_date' user_date.id %}"
-                class="btn btn-ghost btn-secondary btn-circle"
+                class="btn btn-ghost text-white btn-secondary btn-circle"
                 hx-get="{% url 'delete_user_date' user_date.id %}"
 				hx-target="#my_modal_3 .modal-box"
 				onclick="my_modal_3.showModal()">
@@ -146,7 +146,7 @@
                 <p class="text-brown">{{ post.description|truncatechars:100 }}</p>
 
                 <a href="{% url 'add_user_date' %}?post_id={{ post.id }}"
-                    class="add-to-calendar-btn btn btn-secondary mt-2"
+                    class="add-to-calendar-btn btn text-white btn-secondary mt-2"
                     hx-get="{% url 'add_user_date' %}?post_id={{ post.id }}"
 					hx-target="#my_modal_3 .modal-box"
 					onclick="my_modal_3.showModal()"
