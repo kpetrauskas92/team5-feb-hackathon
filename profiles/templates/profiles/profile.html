@@ -73,35 +73,74 @@
             </div>
         </div>
         <!-- Toggle Buttons -->
-        <div class="inline-flex gap-2 items-center pt-2">
-            <button id="myPostsTab" class="btn btn-sm btn-outline">My Ideas</button>
-            <button id="suggestedPostsTab" class="btn btn-sm btn-outline">Suggested Ideas</button>
-            <a href="{% url 'create_event_post_from_profile' %}" class="btn btn-sm btn-circle btn-primary"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <div class="flex justify-between pt-3">
+            <a href="{% url 'event_list' %}" id="suggestedPostsTab" class="btn btn-sm btn-outline">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+                Find Ideas
+            </a>
+            <a href="{% url 'create_event_post_from_profile' %}" class="btn btn-sm btn-outline"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>
+              Add idea
               </a>
         </div>
     
-        <div class="divider divider-primary">/</div>
+        <div class="divider divider-primary">My Ideas</div>
         <div id="myPosts" class="grid grid-cols-1 gap-4">
             {% for post in user_posts %}
             <div class="mb-4 px-4 pt-4 bg-white shadow rounded h-full flex flex-col">
                 <div class="relative w-full h-72 md:h-128 overflow-hidden">
-                {% if post.image %}
-                <img src="{% if 'placeholder' in post.image.url %}{% static 'elements/placeholders/post_placeholder.webp' %}{% else %}{{ post.image.url }}{% endif %}" alt="{{ post.event_name }}"
-                     class="absolute inset-0 w-full h-full object-cover">
-                {% endif %}
-                </div>
-
-                <div class="flex justify-between py-2">
-                    <h4 class="font-bold">{{ post.event_name }}</h4>
-                    {% if post.status == 1 %}
-                    <span class="text-green-600 font-semibold badge badge-outline">Public</span>
-                    {% else %}
-                    <span class="text-red-600 font-semibold badge badge-outline">Private</span>
+                    {% if post.image %}
+                    <img src="{% if 'placeholder' in post.image.url %}{% static 'elements/placeholders/post_placeholder.webp' %}{% else %}{{ post.image.url }}{% endif %}" alt="{{ post.event_name }}"
+                        class="absolute inset-0 w-full h-full object-cover">
                     {% endif %}
                 </div>
-                    <p>{{ post.description|truncatechars:100 }}</p>
+
+                <div class="flex justify-between items-center pt-4">
+                    <div class="flex justify-start items-center">
+                        <h4 class="font-bold text-xl mr-2">{{ post.event_name }}</h4>
+                        {% if post.status == 1 %}
+                        <span class="text-red-600 font-semibold badge badge-outline">Public</span>
+                        {% else %}
+                        <span class="text-green-600 font-semibold badge badge-outline">Private</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="">
+                        <!-- Check if the current user is the author of the post -->
+                        {% if post.author == request.user %}
+                        <div class="">
+                            <!-- Edit Button -->
+                            <a href="{% url 'update_event' slug=post.slug %}"
+                                class="btn btn-sm btn-ghost btn-circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                </svg>
+                            </a>
+                            
+                            <!-- Delete Button -->
+                            <a href="{% url 'delete_event' slug=post.slug %}"
+                                class="btn btn-sm btn-ghost btn-circle"
+                                hx-get="{% url 'delete_event' slug=post.slug %}"
+                                hx-target="#my_modal_3 .modal-box"
+                                onclick="my_modal_3.showModal()">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                </svg>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="divider divider-primary">
+                    <img src="{% static 'elements/icons/lovesched-logo-icon-lightmode.svg' %}"
+                        class="w-6" alt="Logo">
+                </div>
+
+                <p>{{ post.description|truncatechars:100 }}</p>
 
                 <a href="{% url 'add_user_date' %}?post_id={{ post.id }}"
                     class="add-to-calendar-btn btn btn-primary mt-2"
@@ -115,23 +154,6 @@
                     </svg>
                     Add to Calendar
                 </a>
-
-                <!-- Check if the current user is the author of the post -->
-                {% if post.author == request.user %}
-                    <div class="flex justify-between pt-2">
-                        <!-- Edit Button -->
-                        <a href="{% url 'update_event' slug=post.slug %}" class="btn btn-xs w-[49%] btn-outline">Edit</a>
-                        
-                        <!-- Delete Button -->
-                        <a href="{% url 'delete_event' slug=post.slug %}"
-                            class="btn btn-xs w-[49%] btn-outline"
-                            hx-get="{% url 'delete_event' slug=post.slug %}"
-                            hx-target="#my_modal_3 .modal-box"
-                            onclick="my_modal_3.showModal()">
-                            Delete
-                        </a>
-                    </div>
-                {% endif %}
             </div>
             {% empty %}
             <p>No posts to show.</p>
@@ -153,24 +175,5 @@
     
 
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const myPostsTab = document.getElementById('myPostsTab');
-        const suggestedPostsTab = document.getElementById('suggestedPostsTab');
-        const myPosts = document.getElementById('myPosts');
-        const suggestedPosts = document.getElementById('suggestedPosts');
-
-        myPostsTab.addEventListener('click', function() {
-            myPosts.style.display = 'grid';
-            suggestedPosts.style.display = 'none';
-        });
-
-        suggestedPostsTab.addEventListener('click', function() {
-            myPosts.style.display = 'none';
-            suggestedPosts.style.display = 'grid';
-        });
-    });
-</script>
 
 {% endblock %}
