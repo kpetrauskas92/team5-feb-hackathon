@@ -8,9 +8,18 @@ import decimal
 
 
 class UserProfile(models.Model):
+    SEX_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('T', 'Trans'),
+        ('N', 'Non-binary'),
+        ('X', 'Prefer not to say'),
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE,
                                 related_name='profile')
-    phone_number = models.CharField(max_length=20, null=True, blank=True)
+    sex = models.CharField(max_length=1, choices=SEX_CHOICES,
+                           null=True, blank=True)
     first_name = models.CharField(max_length=100, null=True, blank=True)
     last_name = models.CharField(max_length=100, null=True, blank=True)
     image = CloudinaryField('image', default='placeholder')
