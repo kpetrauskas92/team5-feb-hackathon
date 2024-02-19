@@ -6,10 +6,30 @@ html {
     scroll-behavior: smooth;
 }
 
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    background-color: #000000;
+    background-color: #000000;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='986' height='118.3' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23222' stroke-width='14' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");    background-size: cover;
+    background-position: center;
+
+    opacity: 0.1;
+
+    pointer-events: none;
+}
+
 body {
     font-family: 'Raleway', sans-serif;
-    font-weight:500;
-    margin: 0;
+    font-weight: 500;
+    position: relative;
+    background-color: transparent;
 }
 
 h1, h2, h3, p, a {
@@ -62,4 +82,52 @@ h1, h2, h3, p, a {
 
 .text-brown {
     color: #5c2f3b;
+}
+
+
+/* Toast Messages */
+#toast-messages {
+    display: none;
+}
+
+
+#id_password_helptext {
+    display: none;
+}
+
+#div_id_email {
+    display: none;
+}
+
+/* File Input */
+.file-input {
+    display: none;
+}
+
+.file-label {
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #d4d4d4;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.file-label:hover {
+    background-color: #e4e4e4;
+}
+
+.file-name {
+    flex-grow: 1;
+    margin-right: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1rem;
+}
+
+.file-action {
+    margin-right: 10px;
+    font-weight: bold;
 }
