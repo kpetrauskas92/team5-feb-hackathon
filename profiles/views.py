@@ -11,18 +11,17 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 @login_required
 def profile(request):
-    # Query for the user's own posts
+    # Query for the user's own posts without filtering by status
     user_posts = EventPost.objects.filter(
-        author=request.user,
-        status=1).order_by('-created_on')
+        author=request.user).order_by('-created_on')
 
+    # Continue to show only published posts for suggested_posts
     suggested_posts = EventPost.objects.exclude(
         author=request.user).filter(status=1).order_by('-created_on')
 
-    # Query for the user's dates
     user_dates = UserDate.objects.filter(user=request.user).order_by('date')
 
-    # Preparing user_dates for FullCalendar
+    # Preparing user_dates for FullCalendar...
     user_dates_events = [
         {
             'title': user_date.title or "No Title",
@@ -34,7 +33,7 @@ def profile(request):
 
     user_dates_json = json.dumps(user_dates_events, cls=DjangoJSONEncoder)
 
-    # Calculate total budget
+    # Calculate total budget...
     total_budget = user_dates.aggregate(Sum('budget'))['budget__sum'] or 0
 
     return render(request, 'profiles/profile.html', {
