@@ -13,20 +13,20 @@ module.exports = {
       {
         valentine: {
           ...require("daisyui/src/theming/themes")["light"],
-          primary: "#5c2f3b",
-          secondary: "#a24c6f",
+          "primary": "#5c2f3b",
+          "secondary": "#a24c6f",
           "base-100": "#f6e7f3",
-          info: "#5c2f3b",
+          "info": "#5c2f3b",
         },
       },
       {
         mytheme: {
-          primary: "#f6e7f3",
-          secondary: "#a24c6f",
-          accent: "#78afb2",
-          neutral: "#ffffff",
+          "primary": "#f6e7f3",
+          "secondary": "#a24c6f",
+          "accent": "#78afb2",
+          "neutral": "#ffffff",
           "base-100": "#5c2f3b",
-          info: "#5c2f3b",
+          "info": "#5c2f3b",
         },
       },
     ],
