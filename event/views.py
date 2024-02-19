@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .models import EventPost, CATEGORY
-from django.http import HttpResponseForbidden
+from .models import EventPost, Like, CATEGORY
+from django.http import HttpResponseForbidden, Http404, HttpResponse
+from django.template.loader import render_to_string
 from .forms import EventPostForm
 from django.contrib import messages
 from django.db.models import Count
@@ -13,15 +14,22 @@ class EventPostList(generic.ListView):
     A view that displays a list of published EventPosts using
     Django's ListView.
     """
-    queryset = EventPost.objects.filter(status=1)
     template_name = "event/eventlist.html"
     paginate_by = 4
 
     def get_queryset(self):
         category_key = self.request.GET.get('category', '')
-        queryset = EventPost.objects.annotate(likes_count=Count('likes')).order_by('-likes_count')
-        if category_key:
-            queryset = queryset.filter(category=category_key)
+
+        if category_key == 'most_liked':
+            # Filter to include only posts with at least one like and order by likes count
+            queryset = EventPost.objects.filter(status=1).annotate(likes_count=Count('likes')).filter(likes_count__gt=0).order_by('-likes_count')
+        else:
+            queryset = EventPost.objects.filter(status=1)
+            if category_key:
+                queryset = queryset.filter(category=category_key)
+            # Apply default ordering or maintain existing logic for other categories
+            queryset = queryset.annotate(likes_count=Count('likes')).order_by('-created_on')  # Assuming default order is by creation time
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -31,12 +39,58 @@ class EventPostList(generic.ListView):
 
 
 def event_details(request, slug):
-    queryset = EventPost.objects.filter(status=1)
-    eventpost = get_object_or_404(queryset, slug=slug)
+    if request.user.is_authenticated:
+        eventpost = get_object_or_404(EventPost, slug=slug)
+
+        if eventpost.status == 0 and (eventpost.author != request.user and not request.user.is_staff):
+            raise Http404(
+                "This event post is private and you do not have permission to view it.")
+    else:
+        # For unauthenticated users, only fetch public (published) event posts
+        eventpost = get_object_or_404(EventPost, slug=slug, status=1)
+
+    # Check if the current user has liked this post
+    if request.user.is_authenticated:
+        user_like = Like.objects.filter(user=request.user,
+                                        event_post=eventpost).exists()
+    else:
+        user_like = False
+
+    # Count the total likes for the event post
+    total_likes = eventpost.likes.count()
 
     return render(request, 'event/event_details.html', {
         "eventpost": eventpost,
+        "liked": user_like,
+        "total_likes": total_likes,
     })
+
+
+@login_required
+def like_event_post(request, slug):
+    event_post = get_object_or_404(EventPost, slug=slug)
+    user = request.user
+    liked, created = Like.objects.get_or_create(user=user, event_post=event_post)
+
+    if not created:
+        liked.delete()
+        liked = False
+    else:
+        liked = True
+
+    total_likes = event_post.likes.count()
+
+    context = {
+        'eventpost': event_post,
+        'liked': Like.objects.filter(user=request.user,
+                                     event_post=event_post).exists(),
+        'total_likes': total_likes,
+    }
+
+    if 'HX-Request' in request.headers:
+        html = render_to_string('likes/like_button.html', context=context, request=request)
+        return HttpResponse(html)
+    return redirect('event', slug=slug)
 
 
 @login_required
