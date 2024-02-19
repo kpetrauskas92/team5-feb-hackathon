@@ -12,7 +12,7 @@
 
     <!-- Section for the button to add new events, intended for testing or admin use -->
     <div class="my-4 flex justify-center px-4">
-        <a href="{% url 'create_event_post' %}" class="btn btn-primary btn-wide">
+        <a href="{% url 'create_event_post' %}" class="btn btn-secondary btn-wide">
             <!-- SVG icon for adding a new event -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -64,24 +64,24 @@
                                 {% endif %}
                             </a>
                         </div>
-                        <h2 class="text-xl font-semibold mb-2 dark:text-black pt-2">
+                        <h2 class="text-xl font-semibold mb-2 text-brown pt-2">
                             {{ eventpost.event_name }}
                         </h2>
 
                         <!-- Divider with logo -->
-                        <div class="divider divider-primary">
+                        <div class="divider divider-info">
                             <img src="{% static 'elements/icons/lovesched-logo-icon-lightmode.svg' %}"
                                  class="w-6" alt="Logo">
                         </div>
 
                         <!-- Short description of the event -->
-                        <p class="dark:text-gray-800 mb-4">
+                        <p class="text-brown mb-4">
                             {{ eventpost.description|truncatechars:100 }}
                         </p>
                         <!-- Button to view the full event details -->
                         <div class="text-center">
                             <a href="{% url 'event' eventpost.slug %}"
-                               class="btn btn-primary w-full">View Idea</a>
+                               class="btn btn-secondary w-full">View Idea</a>
                         </div>
                     </div>
                 </div>
