@@ -15,7 +15,7 @@
 	</button>
 
 	<!-- Heading -->
-	<h1 id="plan-your-day" class="text-2xl font-bold my-2 text-center">Plan your day</h1>
+	<h1 id="plan-your-day" class="text-2xl text-primary font-bold my-2 text-center">Plan your day</h1>
 
 
 	<!-- Form Section -->
@@ -23,7 +23,7 @@
 		{% csrf_token %}
         {{ form|crispy }}
 		<!-- Submit Button -->
-		<button class="btn btn-error w-full mt-2" type="submit">Add to Calendar</button>
+		<button class="btn btn-secondary w-full mt-2" type="submit">Add to Calendar</button>
 	</form>
 
 </section>

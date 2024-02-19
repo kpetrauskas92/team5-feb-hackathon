@@ -12,7 +12,7 @@
 
     <!-- Section for the button to add new events, intended for testing or admin use -->
     <div class="my-4 flex justify-center px-4">
-        <a href="{% url 'create_event_post' %}" class="btn btn-secondary btn-wide">
+        <a href="{% url 'create_event_post' %}" class="btn text-white btn-secondary btn-wide">
             <!-- SVG icon for adding a new event -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -81,7 +81,7 @@
                         <!-- Button to view the full event details -->
                         <div class="text-center">
                             <a href="{% url 'event' eventpost.slug %}"
-                               class="btn btn-secondary w-full">View Idea</a>
+                               class="btn text-white btn-secondary w-full">View Idea</a>
                         </div>
                     </div>
                 </div>
