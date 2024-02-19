@@ -6,6 +6,10 @@ from .models import EventPost
 
 @admin.register(EventPost)
 class EventPostAdmin(ModelAdmin):
+    """
+    Admin interface for managing EventPost entries.
+    Includes capabilities for listing, searching, and filtering Event Posts.
+    """
 
     list_display = ('event_name', 'author', 'status', 'category',)
     search_fields = ['event_name', 'category']
