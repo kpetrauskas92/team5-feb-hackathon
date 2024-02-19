@@ -1,14 +1,15 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %}  <!-- Base layout inheritance -->
+{% load static %}  <!-- Static files access -->
 
-{% block head_title %}Home Page{% endblock %}
+{% block head_title %}- Home Page{% endblock %}
 
-{% block content %}
+{% block content %}  <!-- Main content block -->
 
 <!-- Hero CTA Section -->
 
 <div class="hero mx-auto max-w-5xl min-h-[50vh]">
 	<div class="hero-content flex-col md:flex-row-reverse">
+		  <!-- Hero image -->
 		<img src="{% static 'elements/graphics/hero-img.png' %}" class="max-w-[18rem] md:max-w-sm rounded-lg" />
 	  <div>
 		<h1 class="text-primary text-5xl font-bold">Plan Your Valentines Day</h1>
@@ -25,7 +26,7 @@
   </div>
 
   <div class="divider m-0 text-accent"></div>
-
+<!-- Testimonials Section -->
   <section class="my-8 mx-auto max-w-5xl">
 	<div class="container mx-auto flex flex-col items-center pb-6 mb-4 md:p-10 md:px-12">
 		<h2 class="text-4xl text-primary font-semibold leadi text-center">Some love from our users</h2>
@@ -64,4 +65,4 @@
 	</div>
 </section>
 
-{% endblock %}
+{% endblock %}  <!-- End of main content block -->

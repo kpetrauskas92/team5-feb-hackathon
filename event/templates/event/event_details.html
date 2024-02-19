@@ -1,109 +1,109 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load tailwind_filters %}
+{% extends 'base.html' %} <!-- Inherit from base layout -->
+{% load static %} <!-- Enables the use of static files -->
+{% load tailwind_filters %} <!-- Loads custom filters for applying Tailwind CSS classes dynamically -->
 
-{% block head_title %}Event Details{% endblock %}
+{% block head_title %}- Event Details{% endblock %}
 
 {% block content %}
-
+<!-- Main content block where the body of the page is defined -->
 
     <div class="mx-auto max-w-2xl mt-6 p-5 bg-white shadow-lg rounded-lg mb-10">
+    <!-- Container for the event details, applying Tailwind CSS for styling -->
 
-    <!-- Event image container with fixed dimensions and responsive behavior -->
-    <div class="relative w-full h-96 md:h-128 overflow-hidden">
-        {% if "placeholder" in eventpost.image.url %}
-        <img class="absolute inset-0 w-full h-full object-cover"
-            src="{% static 'elements/placeholders/post_placeholder.webp' %}"
-            alt="placeholder image">
-        {% else %}
-        <img class="absolute inset-0 w-full h-full object-cover"
-            src="{{ eventpost.image.url }}"
-            alt="{{ eventpost.event_name }}">
-        {% endif %}
-    </div>
-
-    <div class="flex justify-between items-center pt-6">
-        <h2 class="text-3xl font-bold text-gray-900">
-            {{ eventpost.event_name }}
-        </h2>
-        <div class="mr-2" id="like-button-{{ eventpost.slug }}">
-            {% include 'likes/like_button.html' %}
+        <!-- Event image section -->
+        <div class="relative w-full h-96 md:h-128 overflow-hidden">
+            <!-- Dynamically displays either a placeholder image or the event's image -->
+            {% if "placeholder" in eventpost.image.url %}
+            <!-- Placeholder image is shown if the event image URL contains 'placeholder' -->
+            <img class="absolute inset-0 w-full h-full object-cover"
+                src="{% static 'elements/placeholders/post_placeholder.webp' %}"
+                alt="placeholder image">
+            {% else %}
+            <!-- Displays the actual event image if available -->
+            <img class="absolute inset-0 w-full h-full object-cover"
+                src="{{ eventpost.image.url }}"
+                alt="{{ eventpost.event_name }}">
+            {% endif %}
         </div>
-    </div>
+
+        <!-- Event title and like button section -->
+        <div class="flex justify-between items-center pt-6">
+            <h2 class="text-3xl font-bold text-gray-900">{{ eventpost.event_name }}</h2>
+            <!-- Dynamically included like button from another template for modularity -->
+            <div class="mr-2" id="like-button-{{ eventpost.slug }}">
+                {% include 'likes/like_button.html' %}
+            </div>
+        </div>
+
+        <!-- Event location display with an accompanying icon -->
         <p class="text-xl text-gray-600 flex justify-start">
+            <!-- SVG icon for location visualization -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                <!-- Path elements for the SVG icon -->
             </svg>
             {{ eventpost.location }}
         </p>
 
-    <div class="divider divider-primary">
-        <img src="{% static 'elements/icons/lovesched-logo-icon-lightmode.svg' %}" class="w-6" alt="Logo">
-    </div>
+        <!-- Decorative divider with logo -->
+        <div class="divider divider-primary">
+            <img src="{% static 'elements/icons/lovesched-logo-icon-lightmode.svg' %}" class="w-6" alt="Logo">
+        </div>
 
-    <div class="mt-4 p-2 rounded">
-        <div class="flex justify-between">
-            <div class="flex flex-col">
-                <p class="text-md badge rounded-md text-gray-700 mb-1"><strong>Updated on:</strong></p>
-                <p class="text-sm badge rounded-md text-gray-600 mb-4">{{ eventpost.updated_on }}</p>
+        <!-- Section for event update information and action buttons -->
+        <div class="mt-4 p-2 rounded">
+            <div class="flex justify-between">
+                <!-- Displays the date when the event was last updated -->
+                <div class="flex flex-col">
+                    <p class="text-md badge rounded-md text-gray-700 mb-1"><strong>Updated on:</strong></p>
+                    <p class="text-sm badge rounded-md text-gray-600 mb-4">{{ eventpost.updated_on }}</p>
+                </div>
+
+                <!-- Conditionally rendered action buttons for event owners -->
+                {% if user.is_authenticated and eventpost.author == user %}
+                <div>
+                    <!-- Link for editing the event, visible only to the event's author -->
+                    <a href="{% url 'update_event' slug=eventpost.slug %}" class="btn btn-sm btn-ghost btn-circle">
+                        <!-- SVG icon for edit action -->
+                    </a>
+                    <!-- Link for deleting the event, includes a modal confirmation -->
+                    <a href="{% url 'delete_event' slug=eventpost.slug %}"
+                        class="btn btn-sm btn-ghost btn-circle"
+                        hx-get="{% url 'delete_event' slug=eventpost.slug %}"
+                        hx-target="#my_modal_3 .modal-box"
+                        onclick="my_modal_3.showModal()">
+                        <!-- SVG icon for delete action -->
+                    </a>
+                {% endif %}
+                </div>
             </div>
-            {% if user.is_authenticated and eventpost.author == user %}
 
-            <div>
-                <a href="{% url 'update_event' slug=eventpost.slug %}" class="btn btn-sm btn-ghost btn-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                    </svg>
+            <!-- Event description -->
+            <p class="text-md bg-base-100 rounded-md p-2 text-gray-600">{{ eventpost.description }}</p>
+
+            <!-- Navigation and calendar addition buttons -->
+            <div class="flex justify-between items-center mx-auto max-w-2xl mt-4">
+                <!-- Button for navigating back to the event list -->
+                <a href="{% url 'event_list' %}" class="btn btn-primary">
+                    <!-- SVG icon for the back action -->
                 </a>
-                <a href="{% url 'delete_event' slug=eventpost.slug %}"
-                    class="btn btn-sm btn-ghost btn-circle"
-                    hx-get="{% url 'delete_event' slug=eventpost.slug %}"
+                <!-- Conditional rendering for the 'Add to Calendar' button based on user authentication -->
+                {% if user.is_authenticated %}
+                <!-- Button for adding the event to the user's calendar, visible only to authenticated users -->
+                <a href="{% url 'add_user_date' %}?post_id={{ eventpost.id }}"
+                    class="add-to-calendar-btn btn btn-primary"
+                    hx-get="{% url 'add_user_date' %}?post_id={{ eventpost.id }}"
                     hx-target="#my_modal_3 .modal-box"
                     onclick="my_modal_3.showModal()">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
-                    </svg>
+                    <!-- SVG icon for adding to calendar -->
                 </a>
+                {% else %}
+                    <!-- Prompt for unauthenticated users to log in before adding events to their calendar -->
+                    <a href="{% url 'account_login' %}?next={{ request.path }}" class="btn btn-primary">
+                        <!-- SVG icon for the login action -->
+                    </a>
                 {% endif %}
             </div>
         </div>
-
-        <p class="text-md bg-base-100 rounded-md p-2 text-gray-600">{{ eventpost.description }}</p>
-
-        <div class="flex justify-between items-center mx-auto max-w-2xl mt-4">
-            <a href="{% url 'event_list' %}"
-                class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                </svg>
-                Back
-            </a>
-            {% if user.is_authenticated %}
-            <a href="{% url 'add_user_date' %}?post_id={{ eventpost.id }}"
-                class="add-to-calendar-btn btn btn-primary"
-                hx-get="{% url 'add_user_date' %}?post_id={{ eventpost.id }}"
-                hx-target="#my_modal_3 .modal-box"
-                onclick="my_modal_3.showModal()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                Add to Calendar
-            </a>
-            {% else %}
-                <a href="{% url 'account_login' %}?next={{ request.path }}"
-                    class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    Add to Calendar
-                </a>
-            {% endif %}
-        </div>
     </div>
-</div>
 
-
-{% endblock %}
-<!--
-<script src="{% static 'js/xxx' %}"></script> -->
+{% endblock %} <!-- End of the main content block -->

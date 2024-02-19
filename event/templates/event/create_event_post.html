@@ -1,13 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} <!-- Inherit from base layout -->
 
-{% load tailwind_filters %}
-
-{% block content %}
+{% load tailwind_filters %} <!-- Load custom filters for Tailwind CSS utility classes -->
+{% load static %} <!-- Load the static tag to access static files -->
+{% block content %} <!-- Start of the main content block -->
 
 <div class="container flex flex-col items-center justify-center px-4 mx-auto mt-10">
+    <!-- Main container for the content, centered with Tailwind CSS -->
     <div class="card shrink-0 w-full max-w-xl shadow-2xl bg-base-100 dark:bg-slate-50">
+        <!-- Card element for the form, with responsive and dark mode support -->
 
         <h1 id="create-valentines-idea" class="text-2xl font-bold text-center text-primary pt-2">Create Valentines Idea</h1>
+        <!-- Title for the form -->
 
         <!-- Display form errors if they exist -->
         {% if form.errors %}
@@ -17,14 +20,16 @@
         {% endif %}
 
         <form class="card-body" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form|crispy }}
-            
+            {% csrf_token %} <!-- CSRF token for form security -->
+            {{ form|crispy }} <!-- Render the form fields with crispy forms -->
+
             <input type="hidden" name="status" value="1" id="id_status">
-            
+            <!-- Hidden input to set a default status value for the submission -->
+
             <button type="submit" class="btn btn-primary">Submit Post</button>
+            <!-- Submit button for the form -->
         </form>
     </div>
 </div>
 
-{% endblock %}
+{% endblock %} <!-- End of the main content block -->

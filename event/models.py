@@ -14,6 +14,13 @@ CATEGORY = (
 
 
 class EventPost(models.Model):
+    """
+    A model representing an event post in the application.
+
+    Methods:
+        save: Overrides the save method to automatically generate a unique
+        slug if it is not provided.
+    """
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="event_posts",
@@ -33,6 +40,10 @@ class EventPost(models.Model):
     image_alt = models.CharField(max_length=100)
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the save method to ensure a unique slug is generated for each
+        event post if it is not explicitly set.
+        """
         if not self.slug:
             original_slug = slugify(self.event_name)
             unique_slug = original_slug
@@ -44,13 +55,31 @@ class EventPost(models.Model):
         super(EventPost, self).save(*args, **kwargs)
 
     class Meta:
+        # Orders posts by creation date, with the most recent first.
         ordering = ["-created_on"]
 
     def __str__(self):
+        """
+        Returns a string representation of the EventPost, including the event
+        name and the author's username.
+        """
         return f'{self.event_name} | added by {self.author.username}'
 
 
 class Like(models.Model):
+    """
+    Model representing a user's like on an event post. Tracks who liked what
+    and when.
+
+    Attributes:
+        user: Reference to the user who liked an event post.
+        event_post: Reference to the liked event post.
+        created_at: Timestamp of when the like was made.
+
+    Constraints:
+        - A user can like a specific event post only once.
+    """
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='liked_posts',
@@ -64,4 +93,5 @@ class Like(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        # Prevents duplicate likes for the same post by the same user.
         unique_together = ('user', 'event_post')

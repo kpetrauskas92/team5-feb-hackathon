@@ -2,6 +2,7 @@ from django import forms
 from .models import UserProfile, UserDate
 
 
+
 class CustomClearableFileInput(forms.ClearableFileInput):
     template_name = 'custom_widgets/custom_clearable_file_input.html'
 
@@ -28,6 +29,7 @@ class UserProfileForm(forms.ModelForm):
             'last_name': 'Last Name',
             'sex': 'Sex'
             'image',
+
         }
 
         self.fields['first_name'].widget.attrs['autofocus'] = True
