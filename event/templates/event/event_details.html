@@ -81,9 +81,10 @@
             <p class="text-md bg-white rounded-md p-2 text-brown">{{ eventpost.description }}</p>
 
             <!-- Navigation and calendar addition buttons -->
-            <div class="flex justify-between items-center mx-auto max-w-2xl mt-4">
+            <div class="flex justify-between items-center mx-auto max-w-5xl mt-4">
                 <!-- Button for navigating back to the event list -->
                 <a href="{% url 'event_list' %}" class="btn text-white btn-secondary">
+                    Back
                     <!-- SVG icon for the back action -->
                 </a>
                 <!-- Conditional rendering for the 'Add to Calendar' button based on user authentication -->
@@ -94,7 +95,7 @@
                     hx-get="{% url 'add_user_date' %}?post_id={{ eventpost.id }}"
                     hx-target="#my_modal_3 .modal-box"
                     onclick="my_modal_3.showModal()">
-                    <!-- SVG icon for adding to calendar -->
+                    Add to calendar
                 </a>
                 {% else %}
                     <!-- Prompt for unauthenticated users to log in before adding events to their calendar -->
