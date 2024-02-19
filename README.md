@@ -25,7 +25,7 @@ Brought to you by the [**Code Hearted Crew**](#code-hearted-crew)
 * [**Frameworks and Software**](#frameworks-and-software)
 * [**Code Hearted Crew Team**](#code-hearted-crew)
 
-## Planning and Development
+## 🧑‍💻Planning and Development
 
 ### Target Users
 - Couples looking for fresh and innovative date ideas to keep their relationship vibrant and exciting.
@@ -56,6 +56,7 @@ Brought to you by the [**Code Hearted Crew**](#code-hearted-crew)
   - I want to easily recommend Love Sched to friends, highlighting its effectiveness in enhancing romantic relationships through thoughtful and well-planned events.
 
 #### As a differently-abled user
+
   - I want the product to be accessible, with features and designs that accommodate a wide range of disabilities, ensuring everyone can plan and enjoy romantic events.
 
 ### Site Objectives
@@ -89,6 +90,9 @@ Brought to you by the [**Code Hearted Crew**](#code-hearted-crew)
 #### Terms of Service:
     - Our Terms of Service outline simple rules and guidelines to ensure a smooth experience, covering user conduct and privacy.
 
+
+
+
 ### Research
 The following sites were discussed as inspiration.
 - [Design Calendar](https://www.designcalendar.io/events)
@@ -99,13 +103,11 @@ The following sites were discussed as inspiration.
 [**Back to top**](#love-sched)
 
 ### Wireframes
-
 - <img src="docs/images/wf-landing-page.png" width="700" alt="image of wireframe">
-
 - ...
 - ...
 
-### Colour Scheme
+### 🖌️Colour Scheme
 ![An image of the project colour scheme](/docs/images/colour-scheme.png)
 
 ### Typography
@@ -155,16 +157,16 @@ _Login/Register_
 
 <img src="docs/images/footer-ss.png">
 _Footer_
+</details>
 
 ## Future Features
 - Comments are planned as a future feature to enhance the cleanliness and organization of the ideas page, pending the implementation of a comment approval process.
 - ...
 
-## Testing
+## 🧮Testing
 - Please see full documentation for testing and bug reports [here](testing.md)
 
-## Deployment
-
+## ⚙️Deployment
 - #### Deployment Heroku
 
     This project was deployed using Heroku:
@@ -195,7 +197,7 @@ _Footer_
 6. Use command '$ git remote add upstream [main-repository-url]'
 7. To sync, use commands '$ git fetch upstream' and '$ git merge upstream/main'
 
-## Technologies Used
+## 🤖Technologies Used
 
 ## Languages
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
@@ -213,7 +215,6 @@ _Footer_
 - [Procreate](https://procreate.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [DaisyUi](https://daisyui.com/)
-- [Iconify](https://iconify.design/)
 
 
 ## Credits
