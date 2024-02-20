@@ -8,23 +8,23 @@
 			aria-label="Close Sign Out Modal"
 			class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
 			onclick="document.getElementById('my_modal_3').close();">
-		<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+		<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 dark:text-secondary">
 			<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 		</svg>
 	</button>
 
 	<!-- Heading -->
-	<h1 id="confirm-delete-title" class="text-2xl font-bold my-2 text-center">Delete Idea</h1>
+	<h1 id="confirm-delete-title" class="text-2xl font-bold my-2 text-center dark:text-secondary">Delete Idea</h1>
 
 	<!-- Confirmation Message -->
-	<p class="text-center my-4">Are you sure you want delete this?</p>
+	<p class="text-center my-4 dark:text-secondary">Are you sure you want delete this?</p>
 
 	<!-- Form Section -->
 	<form method="post" action="{% url 'delete_event' slug=eventpost.slug %}">
 		{% csrf_token %}
 
 		<!-- Submit Button -->
-		<button class="btn btn-error w-full mt-2" type="submit">Yes</button>
+		<button class="btn btn-error w-full mt-2 dark:text-white" type="submit">Yes</button>
 	</form>
 
 </section>

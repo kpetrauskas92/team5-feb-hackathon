@@ -162,8 +162,36 @@ h1, h2, h3, p, a {
     opacity: 100 !important;
 }
 
+#div_id_login label {
+    color: #000000;
+}
+
+#div_id_password label {
+    color: #000000;
+}
+
+#div_id_password1 label {
+    color: #000000;
+}
+
+#div_id_password2 label {
+    color: #000000;
+}
+
+#div_id_username label {
+    color: #000000;
+}
+
+#div_id_email label {
+    color: #000000;
+}
+
 #id_password1_helptext {
     color: #000000;
+}
+
+form label {
+    color: #000000 !important;
 }
 
 /* File Input */
