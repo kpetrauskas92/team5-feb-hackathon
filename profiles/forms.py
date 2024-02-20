@@ -2,7 +2,6 @@ from django import forms
 from .models import UserProfile, UserDate
 
 
-
 class CustomClearableFileInput(forms.ClearableFileInput):
     template_name = 'custom_widgets/custom_clearable_file_input.html'
 
@@ -19,29 +18,25 @@ class UserProfileForm(forms.ModelForm):
         exclude = ('user',)
 
     def __init__(self, *args, **kwargs):
-        """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field. Adjusted for the 'sex' field.
-        """
-        super().__init__(*args, **kwargs)
+        super(UserProfileForm, self).__init__(*args, **kwargs)
         placeholders = {
             'first_name': 'First Name',
             'last_name': 'Last Name',
-            'sex': 'Sex'
-            'image',
-
+            'sex': 'Sex',
+            'image': 'Upload Image',
         }
 
         self.fields['first_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
             if field in placeholders:
-                placeholder = placeholders.get(field, '')
-                if field != 'image' and field != 'sex':
-                    self.fields[field].widget.attrs['placeholder'] = placeholder
-                    self.fields[field].label = False
+                self.fields[field].widget.attrs['placeholder'] = placeholders[field]
+                if field == 'image':
+                    pass
                 elif field == 'sex':
-                    self.fields[field].widget.attrs['placeholder'] = placeholder
                     self.fields[field].empty_label = "Select Sex"
+                else:
+                    self.fields[field].widget.attrs['class'] = 'your-class-for-hiding-labels'
+
 
 
 class UserDateForm(forms.ModelForm):

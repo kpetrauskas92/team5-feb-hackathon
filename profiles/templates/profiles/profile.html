@@ -9,8 +9,12 @@
     <!-- Sidebar (Profile Info) -->
     <div class="w-full h-full md:w-[40%] p-4 mx-4 md:ml-4 md:mr-0 mb-4 bg-gray-100 rounded-lg shadow-lg">
         <div class="mb-4 flex justify-center">
-            <img src="{{ user.profile.image.url }}" alt="Profile Image">
-        </div>
+            {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" alt="Profile Image">
+            {% else %}
+                <img src="{% static 'elements/placeholders/profile_placeholder.png' %}" alt="Profile Placeholder">
+            {% endif %}
+        </div>        
         <h2 class="text-lg font-semibold text-brown text-center">Hi {{ request.user.profile.first_name|default:request.user.username }}!</h2>
         
         <!-- Edit Profile Button -->
@@ -51,7 +55,7 @@
 
         {% if user_dates.exists and total_budget > 0 %}
             <!-- Display total budget -->
-            <div class="total-budget mt-4">
+            <div class="total-budget mt-4 dark:text-black">
                 <strong>Total Cost:</strong> €{{ total_budget|floatformat:2 }}
             </div>
         {% endif %}
@@ -60,7 +64,7 @@
 
     <!-- Main Content (Posts & Suggested Posts) -->
     <div class="w-full md:w-[60%] px-4 mb-10">
-        <div class="collapse collapse-arrow border border-base-300 mb-2 rounded-md">
+        <div class="collapse collapse-arrow border border-primary mb-2 rounded-md">
             <input type="checkbox" /> 
             <div class="collapse-title font-semibold text-xl">
                 <div class="flex justify-start text-primary">
@@ -89,7 +93,7 @@
               </a>
         </div>
     
-        <div class="text-primary flex justify-start py-4">My Ideas:</div>
+        <div class="text-primary items-center divider divider-start py-4">My Ideas:</div>
         <div id="myPosts" class="grid grid-cols-1 gap-4">
             {% for post in user_posts %}
             <div class="mb-4 px-4 pt-4 bg-white shadow rounded h-full flex flex-col">
@@ -158,7 +162,7 @@
                 </a>
             </div>
             {% empty %}
-            <p>No posts to show.</p>
+            <p>No ideas to show...</p>
             {% endfor %}
         </div>
     

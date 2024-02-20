@@ -154,6 +154,18 @@ h1, h2, h3, p, a {
 }
 
 
+#id_login {
+    color: #000000;
+}
+
+.text-gray-700 {
+    opacity: 100 !important;
+}
+
+#id_password1_helptext {
+    color: #000000;
+}
+
 /* File Input */
 .file-input {
     display: none;
